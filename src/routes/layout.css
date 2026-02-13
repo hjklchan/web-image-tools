@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+/*@layer base {
+    html {
+        @apply font-mono;
+    }
+    body {
+        @apply bg-zinc-100 text-zinc-900;
+    }
+}*/
+
+@layer base {
+    html {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+    }
+    body {
+        @apply bg-zinc-100 text-zinc-900;
+    }
+}
+
+@layer components {
+    /* ====== Layout / Panel ====== */
+    .ui-panel {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-panel-hd {
+        @apply border-b border-zinc-300 bg-zinc-50 px-4 py-2 text-sm font-semibold;
+    }
+    .ui-panel-bd {
+        @apply p-4;
+    }
+    .ui-subbar {
+        @apply border-t border-zinc-300 bg-zinc-50 px-4 py-2 text-xs text-zinc-700;
+    }
+
+    /* ====== Typography helpers ====== */
+    .ui-help {
+        @apply text-xs text-zinc-600;
+    }
+    .ui-muted {
+        @apply text-zinc-700;
+    }
+    .ui-link {
+        @apply underline decoration-zinc-400 hover:decoration-zinc-900;
+    }
+
+    /* ====== Badges / KBD ====== */
+    .ui-badge {
+        @apply border border-zinc-300 bg-zinc-50 px-2 py-0.5 text-xs;
+    }
+    .ui-badge-strong {
+        @apply border border-zinc-900 bg-white px-2 py-0.5 text-xs;
+    }
+    .ui-badge-muted {
+        @apply border border-zinc-300 bg-white px-2 py-0.5 text-xs text-zinc-600;
+    }
+    .ui-kbd {
+        @apply border border-zinc-300 bg-zinc-50 px-2 py-0.5 text-xs;
+    }
+
+    /* ====== Buttons ====== */
+    .ui-btn {
+        @apply inline-flex items-center justify-center border border-zinc-300 bg-zinc-50 px-3 py-2 text-sm hover:bg-zinc-100;
+    }
+    .ui-btn-primary {
+        @apply border-zinc-900 bg-zinc-900 text-white hover:bg-zinc-800;
+    }
+    .ui-btn-subtle {
+        @apply bg-white hover:bg-zinc-50;
+    }
+    .ui-btn-disabled {
+        @apply text-zinc-400;
+    }
+    .ui-btn-sm {
+        @apply px-3 py-1.5 text-sm;
+    }
+
+    /* ====== Inputs ====== */
+    .ui-label {
+        @apply block text-xs text-zinc-700;
+    }
+    .ui-input {
+        @apply w-full border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-zinc-900;
+    }
+    .ui-check {
+        @apply h-4 w-4 accent-zinc-900;
+    }
+    .ui-radio {
+        @apply h-4 w-4 accent-zinc-900;
+    }
+
+    /* ====== Tag input (visual) ====== */
+    .ui-tagbox {
+        @apply border border-zinc-300 bg-white px-2 py-2 flex flex-wrap items-center gap-2;
+    }
+    .ui-tag {
+        @apply border border-zinc-300 bg-zinc-50 px-2 py-0.5 text-xs;
+    }
+    .ui-tag-input {
+        @apply min-w-[120px] flex-1 border-0 bg-transparent px-1 py-1 text-sm outline-none;
+    }
+
+    /* ====== Card ====== */
+    .ui-card {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-card-hd {
+        @apply border-b border-zinc-300 bg-zinc-50 px-3 py-2 text-sm font-semibold;
+    }
+    .ui-card-bd {
+        @apply p-3 text-sm leading-6;
+    }
+
+    /* ====== Alerts / Toast ====== */
+    .ui-alert {
+        @apply border border-zinc-300 bg-zinc-50 p-3 text-sm;
+    }
+    .ui-alert-strong {
+        @apply border-zinc-900 bg-white;
+    }
+    .ui-alert-title {
+        @apply text-xs text-zinc-700;
+    }
+
+    /* ====== List / Menu ====== */
+    .ui-list {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-list-item {
+        @apply block px-3 py-2 text-sm hover:bg-zinc-50;
+    }
+    .ui-list-sep {
+        @apply border-b border-zinc-300;
+    }
+
+    /* ====== Tabs ====== */
+    .ui-tabs {
+        @apply flex flex-wrap gap-2;
+    }
+    .ui-tab {
+        @apply border border-zinc-300 bg-zinc-50 px-3 py-1.5 text-sm hover:bg-zinc-100;
+    }
+    .ui-tab-active {
+        @apply border-zinc-900 bg-white;
+    }
+    .ui-tabpanel {
+        @apply border border-zinc-300 bg-zinc-50 p-3 text-sm leading-6;
+    }
+
+    /* ====== Pagination ====== */
+    .ui-pagination {
+        @apply inline-flex border border-zinc-300 text-sm;
+    }
+    .ui-pagebtn {
+        @apply px-3 py-2 bg-zinc-50 hover:bg-zinc-100;
+    }
+    .ui-pagebtn-sep {
+        @apply border-r border-zinc-300;
+    }
+    .ui-pagebtn-active {
+        @apply bg-white;
+    }
+
+    /* ====== Table ====== */
+    .ui-table-wrap {
+        @apply overflow-x-auto;
+    }
+    .ui-table {
+        @apply w-full border-collapse text-left;
+    }
+    .ui-thead {
+        @apply text-xs;
+    }
+    .ui-tr-head {
+        @apply border-b border-zinc-300 bg-zinc-50;
+    }
+    .ui-th {
+        @apply p-2 border-r border-zinc-300;
+    }
+    .ui-th-last {
+        @apply p-2;
+    }
+    .ui-tr {
+        @apply border-b border-zinc-300;
+    }
+    .ui-td {
+        @apply p-2 border-r border-zinc-300;
+    }
+    .ui-td-last {
+        @apply p-2;
+    }
+    .ui-td-meta {
+        @apply text-xs text-zinc-700;
+    }
+
+    /* ====== Stats ====== */
+    .ui-stats {
+        @apply grid grid-cols-3 divide-x divide-zinc-300 text-sm;
+    }
+    .ui-stat {
+        @apply p-3;
+    }
+    .ui-stat-k {
+        @apply text-xs text-zinc-700;
+    }
+    .ui-stat-v {
+        @apply mt-1 text-base font-semibold;
+    }
+
+    /* ====== Steps ====== */
+    .ui-steps {
+        @apply divide-y divide-zinc-300 text-sm;
+    }
+    .ui-step {
+        @apply p-3 flex items-center justify-between;
+    }
+    .ui-step-n {
+        @apply text-xs text-zinc-700;
+    }
+
+    /* ====== Accordion ====== */
+    .ui-accordion {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-accordion-summary {
+        @apply cursor-pointer select-none bg-zinc-50 px-3 py-2 text-sm hover:bg-zinc-100;
+    }
+    .ui-accordion-body {
+        @apply p-3 text-sm leading-6;
+    }
+
+    /* ====== Dropdown (static) ====== */
+    .ui-dropdown {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-dropdown-btn {
+        @apply w-full border border-zinc-300 bg-zinc-50 px-3 py-2 text-sm hover:bg-zinc-100;
+    }
+    .ui-dropdown-menu {
+        @apply mt-2 border border-zinc-300 bg-white;
+    }
+    .ui-dropdown-item {
+        @apply block px-3 py-2 text-sm hover:bg-zinc-50;
+    }
+    .ui-dropdown-item-sep {
+        @apply border-b border-zinc-300;
+    }
+
+    /* ====== Modal (static) ====== */
+    .ui-modal {
+        @apply border border-zinc-300 bg-white;
+    }
+    .ui-modal-hd {
+        @apply border-b border-zinc-300 bg-zinc-50 px-3 py-2 text-sm font-semibold;
+    }
+    .ui-modal-bd {
+        @apply p-3 text-sm leading-6;
+    }
+    .ui-modal-actions {
+        @apply mt-3 flex gap-2;
+    }
+
+    /* ====== Skeleton / Empty ====== */
+    .ui-skeleton {
+        @apply border border-zinc-300 bg-zinc-50;
+    }
+    .ui-empty {
+        @apply border border-zinc-300 bg-zinc-50 p-3;
+    }
+    .ui-empty-title {
+        @apply text-xs text-zinc-700;
+    }
+    .ui-empty-text {
+        @apply mt-1 text-sm;
+    }
+}
