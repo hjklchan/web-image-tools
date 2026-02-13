@@ -2,7 +2,7 @@
     import "./layout.css";
     import type { Snippet } from "svelte";
 
-    type Props = { children?: Snippet };
+    type Props = { children: Snippet };
     let { children }: Props = $props();
 
     // 常见侧栏广告位宽度：160/300/320
@@ -20,7 +20,7 @@
     </header>
 
     <main class="flex-1">
-        <div class="mx-auto max-w-400 px-3 sm:px-4 py-4">content...</div>
+        <div class="mx-auto max-w-400 px-3 sm:px-4 py-4">{@render children()}</div>
     </main>
 
     <!-- Footer: sticks to bottom via flex column -->
