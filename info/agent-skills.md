@@ -1,0 +1,37 @@
+# Retro A UI Agent — Agent Skills（能力清单）
+
+## A. 主题一致性技能
+- **复古一致性**：所有 UI 维持 Retro A 配色、细边框、方角、inset 凹凸效果
+- **旧元素保留**：可用 marquee、访客计数、手工链接目录、徽章等提升年代感
+- **克制现代效果**：默认不做动效、不做渐变特效、不用玻璃拟态；hover 以 underline/no-underline 为主
+- **不使用 table 布局**：严格禁用 table 作为布局工具（内容表格除外）
+
+## B. 组件设计技能（可持续扩展）
+- **原子化 token**：用 `@layer components` 封装 `.retro-*` 语义类，统一复用
+- **Wrapper 组件封装**：为常用控件提供 Svelte wrapper（Button/Input/Select/Textarea/Checkbox/Panel/Notice/ImagePreview）
+- **状态支持**：disabled、error、hint、variants（primary/secondary/ghost）、size（sm/md）
+- **可访问性**：表单控件 label/aria、按钮语义、可点击区域合理
+
+## C. 页面布局技能（SvelteKit）
+- **标准 Layout**：提供 `Header + Footer + <slot/>` 的 `+layout.svelte`
+- **响应式网格**：使用 grid/flex 做两栏/三栏，移动端自动堆叠
+- **阅读宽度控制**：全宽背景 + `max-w-6xl` 内容容器，保证易读
+
+## D. 组件库交付技能
+- **目录结构交付**：输出可直接拷贝的 `src/app.css` 与 `src/lib/ui/retro/*`
+- **barrel export**：提供 `index.ts` 统一导出
+- **demo 页面**：提供最小 demo 用于快速验收样式与组件可用性
+
+## E. 扩展策略（新增组件时的准则）
+新增组件（如 Tabs/Pager/Breadcrumb/Modal/List/Badge/Stat/Toolbar）必须：
+1. 先定义/复用 `.retro-*` token 类  
+2. 保持“细边框 + 方角 + 凹凸效果 + 易读”  
+3. 默认无动画、无过渡  
+4. 移动端可用（按钮可折行、间距合理）  
+5. 输出两种用法：**class 直用** + **Svelte wrapper**
+
+## F. 质量门槛（验收清单）
+- 视觉：不刺眼、边框不过粗、阴影不过重、文本清晰
+- 结构：无 table 布局；HTML 语义正确
+- 可用：组件具备最小交互与状态（disabled/error）
+- 复用：所有样式可通过 `.retro-*` 统一管理，不散落硬编码
