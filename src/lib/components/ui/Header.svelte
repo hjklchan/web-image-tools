@@ -1,14 +1,10 @@
 <script lang="ts">
+    import Marquee from "$lib/components/Marquee.svelte";
+    import { navs as nav } from "$lib/data/navs";
+
     export let visitors = "000042";
     export let siteTitle = "IMAZING";
     export let tagline = ":: 56k-friendly :: no cookies :: human-made ::";
-    export let nav: Array<{ label: string; href: string }> = [
-        { label: "/home", href: "/" },
-        // { label: "/about.txt", href: "/about" },
-        // { label: "/links", href: "/links" },
-        // { label: "/archives", href: "/archives" },
-        // { label: "/guestbook", href: "/guestbook" },
-    ];
 
     let q = "";
 </script>
@@ -36,10 +32,7 @@
 
     <div class="border-b border-[#caa96a] bg-[#fff6c9]">
         <div class="mx-auto max-w-6xl px-3 py-1.5 text-sm">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
-                ★ Welcome ★ Links updated ★ New tools & textfiles ★ Keep the web
-                small, keep it human ★
-            </marquee>
+            <Marquee />
         </div>
     </div>
 
