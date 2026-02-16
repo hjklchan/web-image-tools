@@ -50,7 +50,7 @@
     <!-- Nav + Search -->
     <div class="bg-[#fffbe3] border-b border-[#caa96a]">
         <div
-            class="mx-auto max-w-6xl px-3 py-2 flex flex-wrap items-center gap-2"
+            class="mx-auto max-w-7xl px-3 py-2 flex flex-wrap items-center gap-2"
         >
             <nav class="flex flex-wrap gap-3 text-sm">
                 {#each nav as item}

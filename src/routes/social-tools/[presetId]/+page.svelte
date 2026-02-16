@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
     import ImageCropper from "$lib/components/ImageCropper.svelte";
     import { presets } from "$lib/data/social-tools";
 
-    const presetId = $derived($page.params.presetId);
+    const presetId = $derived(page.params.presetId);
     const preset = $derived(presets.find((p) => p.id === presetId));
 
     const sizeMatch = $derived(preset?.size.match(/(\d+)\s*[×x]\s*(\d+)/i));
