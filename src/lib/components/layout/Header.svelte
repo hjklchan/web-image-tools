@@ -1,9 +1,10 @@
 <script lang="ts">
     import Marquee from "../Marquee.svelte";
     import { navs as nav } from "$lib/data/navs";
+    import type { Snippet } from "svelte";
 
     type Props = {
-        siteTitle?: string;
+        siteTitle?: Snippet | string;
         tagLine?: string;
     };
 
@@ -26,7 +27,7 @@
             <a href="/" class="retro-link font-black tracking-wide"
                 >{siteTitle}</a
             >
-            <span class="text-xs opacity-90">{tagLine}</span>
+            <span class="text-xs pt-1 opacity-90">{tagLine}</span>
 
             <!-- <div class="ml-auto flex flex-wrap items-center gap-2 text-xs">
                 <span
