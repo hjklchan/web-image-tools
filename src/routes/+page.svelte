@@ -46,7 +46,7 @@
 <section class="retro-paper retro-panel mb-3">
     <div class="retro-panel__body space-y-4">
         <div class="w-full text-center">
-            <h1 class="text-5xl font-bold text-[#143a66]">IMAZING</h1>
+            <h1 class="text-5xl font-bold text-[#143a66]">IMA<span class="text-red-900">ZING</span></h1>
         </div>
     </div>
 </section>
