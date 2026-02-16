@@ -74,7 +74,7 @@
     let error = $state("");
     let fileName = $state("");
     let originalMime = $state("image/png");
-    let aspectValue = $state(defaultAspectValue);
+    let aspectValue = $derived(defaultAspectValue ?? "");
 
     // cropper runtime
     let cropper: any = null;
@@ -293,7 +293,7 @@
                 type="file"
                 {accept}
                 class="retro-control mt-1"
-                on:change={onFileChange}
+                onchange={onFileChange}
                 aria-label="Select image to crop"
             />
             <div class="retro-field__hint mt-1">
@@ -309,8 +309,8 @@
         {/if}
 
         {#if imgSrc}
-            <div class="grid gap-2 md:grid-cols-2">
-                <div>
+            <div class="flex flex-wrap items-end gap-4">
+                <div class="shrink-0">
                     <label for="aspect-ratio" class="retro-field__label"
                         >Aspect ratio</label
                     >
@@ -318,30 +318,18 @@
                         id="aspect-ratio"
                         class="retro-control mt-1"
                         bind:value={aspectValue}
-                        on:change={onAspectChange}
+                        onchange={onAspectChange}
                     >
                         {#each aspectOptions as opt}
                             <option value={opt.value}>{opt.label}</option>
                         {/each}
                     </select>
-                    <div class="retro-field__hint mt-1">
-                        {#if outW && outH}
-                            Export size: <span class="font-bold"
-                                >{outW}×{outH}</span
-                            >
-                        {:else}
-                            Export size: <span class="font-bold"
-                                >crop selection size</span
-                            >
-                        {/if}
-                    </div>
                 </div>
-
-                <div class="flex items-end gap-2">
+                <div class="flex shrink-0 items-end gap-2">
                     <button
                         type="button"
                         class="retro-btn retro-btn--primary retro-btn--md"
-                        on:click={crop}
+                        onclick={crop}
                     >
                         Crop
                     </button>
@@ -349,12 +337,22 @@
                         <button
                             type="button"
                             class="retro-btn retro-btn--secondary retro-btn--md"
-                            on:click={download}
+                            onclick={download}
                         >
                             Download
                         </button>
                     {/if}
                 </div>
+                <span class="retro-field__hint mt-1">
+                    {#if outW && outH}
+                        Export size: <span class="font-bold">{outW}×{outH}</span
+                        >
+                    {:else}
+                        Export size: <span class="font-bold"
+                            >crop selection size</span
+                        >
+                    {/if}
+                </span>
             </div>
 
             <!-- Fixed-height preview -->
