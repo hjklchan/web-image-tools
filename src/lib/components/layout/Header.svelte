@@ -2,7 +2,6 @@
     import Marquee from "../Marquee.svelte";
     import { navs as nav } from "$lib/data/navs";
 
-    export let visitors = "000042";
     export let siteTitle = ".:IMAZING:.";
     export let tagline = ":: friendly :: no cookies ::";
     let q = "";
