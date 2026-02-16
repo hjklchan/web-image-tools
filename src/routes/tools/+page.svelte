@@ -48,7 +48,7 @@
             id: "watermark",
             title: "Watermark",
             desc: "Text / image watermark",
-            href: "/tools/images/watermark",
+            href: "/tools/watermark",
             tags: ["watermark", "text"],
             badge: "BETA",
         },
