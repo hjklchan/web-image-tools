@@ -15,7 +15,6 @@
             desc: "Local JPG/PNG/WebP compression",
             href: "/tools/compressor",
             tags: ["local", "webp", "jpg", "png"],
-            badge: "HOT",
         },
         {
             id: "convert",
@@ -35,7 +34,7 @@
             id: "crop",
             title: "Crop",
             desc: "Crop with free / fixed aspect",
-            href: "/tools/images/crop",
+            href: "/tools/crop",
             tags: ["crop", "aspect"],
         },
         {
@@ -57,7 +56,7 @@
             id: "exif",
             title: "EXIF",
             desc: "View / remove metadata (privacy)",
-            href: "/tools/images/exif",
+            href: "/tools/exif",
             tags: ["exif", "privacy"],
         },
         {
@@ -66,7 +65,6 @@
             desc: "Extract a color palette",
             href: "/tools/images/palette",
             tags: ["color", "design"],
-            badge: "NEW",
         },
         {
             id: "sprite",
@@ -120,9 +118,7 @@
 
     <div class="retro-panel__body space-y-3">
         <!-- Search row (input + button in ONE LINE) -->
-        <form class="space-y-1" on:submit={onSearchSubmit}>
-            <label class="retro-field__label">Search</label>
-
+        <form class="space-y-1" onsubmit={onSearchSubmit}>
             <div class="flex items-stretch gap-2">
                 <input
                     class="retro-control flex-1 min-w-0"
@@ -131,17 +127,17 @@
                     aria-label="search image tools"
                 />
 
-                <button
+                <!-- <button
                     class="retro-btn retro-btn--primary retro-btn--md shrink-0"
                     type="submit"
                 >
                     Search
-                </button>
+                </button> -->
 
                 <button
                     class="retro-btn retro-btn--secondary retro-btn--md shrink-0"
                     type="button"
-                    on:click={() => (q = "")}
+                    onclick={() => (q = "")}
                 >
                     Clear
                 </button>
@@ -192,11 +188,11 @@
                         {/each}
                     </div>
 
-                    <div class="mt-3">
+                    <!-- <div class="mt-3">
                         <span class="retro-btn retro-btn--primary retro-btn--sm"
                             >OPEN</span
                         >
-                    </div>
+                    </div> -->
                 </a>
             {/each}
         </div>
