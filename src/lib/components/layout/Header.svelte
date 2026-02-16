@@ -2,9 +2,19 @@
     import Marquee from "../Marquee.svelte";
     import { navs as nav } from "$lib/data/navs";
 
-    export let siteTitle = ".:IMAZING:.";
-    export let tagline = ":: friendly :: no cookies ::";
-    let q = "";
+    type Props = {
+        siteTitle?: string;
+        tagLine?: string;
+    };
+
+    let {
+        siteTitle = "IMAZING",
+        tagLine = "friendly :: no cookies ::",
+    }: Props = $props();
+    // export let siteTitle = SITE_TITLE;
+    // export let tagline = TAG_LINE;
+
+    // let q = $state("");
 </script>
 
 <header class="sticky top-0 z-30">
@@ -16,7 +26,7 @@
             <a href="/" class="retro-link font-black tracking-wide"
                 >{siteTitle}</a
             >
-            <span class="text-xs opacity-90">{tagline}</span>
+            <span class="text-xs opacity-90">{tagLine}</span>
 
             <!-- <div class="ml-auto flex flex-wrap items-center gap-2 text-xs">
                 <span
