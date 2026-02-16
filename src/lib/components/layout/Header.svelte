@@ -1,17 +1,10 @@
 <script lang="ts">
     import Marquee from "../Marquee.svelte";
+    import { navs as nav } from "$lib/data/navs";
 
     export let visitors = "000042";
-    export let siteTitle = "ALTEXXA PERSONAL NODE";
-    export let tagline = ":: 56k-friendly :: no cookies :: human-made ::";
-    export let nav: Array<{ label: string; href: string }> = [
-        { label: "/home", href: "/" },
-        { label: "/about.txt", href: "/about" },
-        { label: "/links", href: "/links" },
-        { label: "/archives", href: "/archives" },
-        { label: "/guestbook", href: "/guestbook" },
-    ];
-
+    export let siteTitle = ".:IMAZING:.";
+    export let tagline = ":: friendly :: no cookies ::";
     let q = "";
 </script>
 
