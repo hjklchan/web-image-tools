@@ -1,78 +1,95 @@
-<script module>
-    export type AspectOption = { label: string; value: string };
-
-    export type CropperResult = {
-        blob: Blob;
-        url: string;
-        mime: string;
-        fileName: string;
-    };
-</script>
-
 <script lang="ts">
-    import { onDestroy, createEventDispatcher } from "svelte";
     import { browser } from "$app/environment";
     import RetroImagePreview from "$lib/components/ui/RetroImagePreview.svelte";
 
-    // ===== Props =====
-    export let title = "Image Crop";
-    export let subtitle = "Crop with free or fixed aspect ratio";
+    export type AspectOption = { label: string; value: string };
 
-    export let accept = "image/jpeg,image/png,image/webp,image/gif";
-    export let allowedMimes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-        "image/gif",
-    ];
+    export type CroppedResult = {
+        blob: Blob;
+        url: string; // object url
+        mime: string;
+        fileName: string; // original
+        downloadName: string; // suggested download name
+        width: number; // exported px
+        height: number; // exported px
+    };
 
-    export let aspectOptions: AspectOption[] = [
-        { label: "Free", value: "" },
-        { label: "1:1", value: "1" },
-        { label: "16:9", value: "1.778" },
-        { label: "4:3", value: "1.333" },
-        { label: "3:2", value: "1.5" },
-    ];
+    export type ImageCropperProps = {
+        title?: string;
+        subtitle?: string;
 
-    export let defaultAspectValue = ""; // e.g. "1.778"
-    export let previewHeight: string = "55vh"; // e.g. "400px" or "55vh"
-    export let previewMinHeight: string = "320px";
+        accept?: string;
+        allowedMimes?: string[];
 
-    export let showDownload = true;
-    export let autoDestroyObjectUrls = true;
+        aspectOptions?: AspectOption[];
+        defaultAspectValue?: string;
 
-    // 你现有逻辑：导出 mime 默认跟原图一致（只允许 jpg/png/webp）
-    export let preferOriginalMime = true;
+        previewHeight?: string; // e.g. "55vh" / "420px"
+        previewMinHeight?: string; // e.g. "320px"
 
-    // ===== State =====
-    let imgEl: HTMLImageElement;
-    let imgSrc = "";
-    let cropResultUrl = "";
-    let error = "";
-    let fileName = "";
-    let originalMime = "image/png";
-    let aspectValue = defaultAspectValue;
+        showDownload?: boolean;
+        preferOriginalMime?: boolean;
 
-    // Cropper.js SSR 安全加载
-    let CropperClass: any = null;
+        outW?: number | null;
+        outH?: number | null;
+
+        onCropped?: (r: CroppedResult) => void;
+        onError?: (message: string) => void;
+    };
+
+    // -------- $props() with defaults ----------
+    const {
+        title = "Image Crop",
+        subtitle = "Crop with free or fixed aspect ratio",
+
+        accept = "image/jpeg,image/png,image/webp,image/gif",
+        allowedMimes = ["image/jpeg", "image/png", "image/webp", "image/gif"],
+
+        aspectOptions = [
+            { label: "Free", value: "" },
+            { label: "1:1", value: "1" },
+            { label: "16:9", value: "1.7777777778" },
+            { label: "4:3", value: "1.3333333333" },
+            { label: "3:2", value: "1.5" },
+        ],
+        defaultAspectValue = "",
+
+        previewHeight = "55vh",
+        previewMinHeight = "320px",
+
+        showDownload = true,
+        preferOriginalMime = true,
+
+        outW = null,
+        outH = null,
+
+        onCropped = undefined,
+        onError = undefined,
+    }: ImageCropperProps = $props();
+
+    // -------- state ----------
+    let imgEl = $state<HTMLImageElement | null>(null);
+    let imgSrc = $state("");
+    let cropResultUrl = $state("");
+    let error = $state("");
+    let fileName = $state("");
+    let originalMime = $state("image/png");
+    let aspectValue = $state(defaultAspectValue);
+
+    // cropper runtime
     let cropper: any = null;
+    let CropperClass: any = null;
+    let cropperCssLoaded = false;
 
-    const dispatch = createEventDispatcher<{ cropped: CropperResult }>();
+    function setErr(msg: string) {
+        error = msg;
+        onError?.(msg);
+    }
 
     function parseAspect(v: string): number {
         if (!v) return NaN;
         const n = Number(v);
         return Number.isFinite(n) ? n : NaN;
-    }
-
-    async function ensureCropper() {
-        if (!browser) return;
-        if (CropperClass) return;
-        const mod = await import("cropperjs");
-        CropperClass = mod.default;
-        // 建议把 cropper.css 放到全局 app.css（见下方说明），
-        // 但这里也可动态加载（仅浏览器）
-        await import("cropperjs/dist/cropper.css");
     }
 
     function cleanupCropperOnly() {
@@ -82,56 +99,79 @@
         }
     }
 
+    function cleanupUrls() {
+        if (imgSrc) {
+            URL.revokeObjectURL(imgSrc);
+            imgSrc = "";
+        }
+        if (cropResultUrl) {
+            URL.revokeObjectURL(cropResultUrl);
+            cropResultUrl = "";
+        }
+    }
+
     function cleanupAll() {
         cleanupCropperOnly();
-        if (autoDestroyObjectUrls) {
-            if (imgSrc) URL.revokeObjectURL(imgSrc);
-            if (cropResultUrl) URL.revokeObjectURL(cropResultUrl);
-        }
-        imgSrc = "";
-        cropResultUrl = "";
+        cleanupUrls();
         fileName = "";
+        originalMime = "image/png";
         error = "";
+    }
+
+    function extByMime(mime: string) {
+        if (mime === "image/jpeg") return "jpg";
+        if (mime === "image/webp") return "webp";
+        return "png";
+    }
+
+    function exportMime() {
+        if (
+            preferOriginalMime &&
+            ["image/jpeg", "image/png", "image/webp"].includes(originalMime)
+        ) {
+            return originalMime;
+        }
+        return "image/png";
+    }
+
+    function downloadNameFor(mime: string) {
+        const base = (fileName || "image").replace(/\.[^.]+$/, "");
+        return `${base}_cropped.${extByMime(mime)}`;
+    }
+
+    async function ensureCropperLoaded() {
+        if (!browser) return;
+
+        if (!CropperClass) {
+            const mod = await import("cropperjs");
+            CropperClass = mod.default;
+        }
+
+        // 推荐：全局在 src/app.css 里引一次：
+        // @import "cropperjs/dist/cropper.css";
+        // 如果不想全局引，就保留动态引入：
+        if (!cropperCssLoaded) {
+            await import("cropperjs/dist/cropper.css");
+            cropperCssLoaded = true;
+        }
     }
 
     function onFileChange(e: Event) {
         const input = e.target as HTMLInputElement;
-        const file = input.files?.[0];
-        if (!file) return;
+        const f = input.files?.[0];
+        if (!f) return;
 
-        if (!allowedMimes.includes(file.type)) {
-            error = "Only JPG, PNG, WebP, GIF supported";
+        if (!allowedMimes.includes(f.type)) {
+            setErr("Only JPG, PNG, WebP, GIF supported");
             return;
         }
 
         cleanupAll();
         error = "";
-        fileName = file.name;
-        originalMime = file.type || "image/png";
-        imgSrc = URL.createObjectURL(file);
+        fileName = f.name;
+        originalMime = f.type || "image/png";
+        imgSrc = URL.createObjectURL(f);
         input.value = "";
-    }
-
-    async function onImageLoad() {
-        if (!imgEl) return;
-        await ensureCropper();
-
-        cleanupCropperOnly();
-
-        cropper = new CropperClass(imgEl, {
-            aspectRatio: parseAspect(aspectValue),
-            viewMode: 1,
-            dragMode: "move",
-            autoCrop: true,
-            responsive: true,
-            restore: false,
-            background: false,
-            modal: true,
-            guides: false,
-            center: true,
-            highlight: false,
-            toggleDragModeOnDblclick: false,
-        });
     }
 
     function onAspectChange() {
@@ -142,31 +182,41 @@
         if (!cropper) return;
 
         const canvas: HTMLCanvasElement = cropper.getCroppedCanvas({
+            width: outW ?? undefined,
+            height: outH ?? undefined,
+            imageSmoothingEnabled: true,
             imageSmoothingQuality: "high",
         });
-        if (!canvas) return;
 
-        const mime =
-            preferOriginalMime &&
-            ["image/jpeg", "image/png", "image/webp"].includes(originalMime)
-                ? originalMime
-                : "image/png";
+        if (!canvas) {
+            setErr("Failed to crop: canvas not available");
+            return;
+        }
 
+        const mime = exportMime();
         const quality = mime === "image/png" ? undefined : 0.95;
 
         canvas.toBlob(
             (blob) => {
-                if (!blob) return;
-                if (autoDestroyObjectUrls && cropResultUrl)
-                    URL.revokeObjectURL(cropResultUrl);
+                if (!blob) {
+                    setErr("Failed to export: toBlob returned null");
+                    return;
+                }
+
+                if (cropResultUrl) URL.revokeObjectURL(cropResultUrl);
                 cropResultUrl = URL.createObjectURL(blob);
 
-                dispatch("cropped", {
+                const result: CroppedResult = {
                     blob,
                     url: cropResultUrl,
                     mime,
                     fileName,
-                });
+                    downloadName: downloadNameFor(mime),
+                    width: canvas.width,
+                    height: canvas.height,
+                };
+
+                onCropped?.(result);
             },
             mime,
             quality,
@@ -175,21 +225,56 @@
 
     function download() {
         if (!cropResultUrl) return;
-
-        const ext =
-            originalMime === "image/jpeg"
-                ? ".jpg"
-                : originalMime === "image/webp"
-                  ? ".webp"
-                  : ".png";
+        const mime = exportMime();
 
         const a = document.createElement("a");
         a.href = cropResultUrl;
-        a.download = fileName.replace(/\.[^.]+$/, "") + "_cropped" + ext;
+        a.download = downloadNameFor(mime);
         a.click();
     }
 
-    onDestroy(cleanupAll);
+    // -------- effects ----------
+    // Init/destroy cropper when image + element ready; reinit if aspect changes.
+    $effect(() => {
+        const src = imgSrc;
+        const el = imgEl;
+        const ar = aspectValue;
+
+        if (!browser || !src || !el) return;
+
+        let cancelled = false;
+
+        (async () => {
+            await ensureCropperLoaded();
+            if (cancelled) return;
+
+            cleanupCropperOnly();
+
+            cropper = new CropperClass(el, {
+                aspectRatio: parseAspect(ar),
+                viewMode: 1,
+                dragMode: "move",
+                autoCrop: true,
+                autoCropArea: 1,
+                responsive: true,
+                restore: false,
+                background: false,
+                modal: true,
+                guides: false,
+                center: true,
+                highlight: false,
+                toggleDragModeOnDblclick: false,
+            });
+        })();
+
+        return () => {
+            cancelled = true;
+            cleanupCropperOnly();
+        };
+    });
+
+    // Cleanup on unmount
+    $effect(() => () => cleanupAll());
 </script>
 
 <section class="retro-paper retro-panel">
@@ -199,10 +284,12 @@
     </div>
 
     <div class="retro-panel__body space-y-4">
-        <!-- File selection -->
         <div>
-            <label class="retro-field__label">Select image</label>
+            <label for="crop-file" class="retro-field__label"
+                >Select image</label
+            >
             <input
+                id="crop-file"
                 type="file"
                 {accept}
                 class="retro-control mt-1"
@@ -222,21 +309,55 @@
         {/if}
 
         {#if imgSrc}
-            <!-- Aspect ratio -->
-            <div>
-                <label class="retro-field__label">Aspect ratio</label>
-                <select
-                    class="retro-control mt-1"
-                    bind:value={aspectValue}
-                    on:change={onAspectChange}
-                >
-                    {#each aspectOptions as opt}
-                        <option value={opt.value}>{opt.label}</option>
-                    {/each}
-                </select>
+            <div class="grid gap-2 md:grid-cols-2">
+                <div>
+                    <label for="aspect-ratio" class="retro-field__label"
+                        >Aspect ratio</label
+                    >
+                    <select
+                        id="aspect-ratio"
+                        class="retro-control mt-1"
+                        bind:value={aspectValue}
+                        on:change={onAspectChange}
+                    >
+                        {#each aspectOptions as opt}
+                            <option value={opt.value}>{opt.label}</option>
+                        {/each}
+                    </select>
+                    <div class="retro-field__hint mt-1">
+                        {#if outW && outH}
+                            Export size: <span class="font-bold"
+                                >{outW}×{outH}</span
+                            >
+                        {:else}
+                            Export size: <span class="font-bold"
+                                >crop selection size</span
+                            >
+                        {/if}
+                    </div>
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button
+                        type="button"
+                        class="retro-btn retro-btn--primary retro-btn--md"
+                        on:click={crop}
+                    >
+                        Crop
+                    </button>
+                    {#if showDownload && cropResultUrl}
+                        <button
+                            type="button"
+                            class="retro-btn retro-btn--secondary retro-btn--md"
+                            on:click={download}
+                        >
+                            Download
+                        </button>
+                    {/if}
+                </div>
             </div>
 
-            <!-- Preview: fixed vh/px height -->
+            <!-- Fixed-height preview -->
             <div
                 class="border border-[#caa96a] overflow-hidden bg-[#1b1b1b]"
                 style={`height:${previewHeight};min-height:${previewMinHeight};`}
@@ -245,20 +366,9 @@
                     bind:this={imgEl}
                     src={imgSrc}
                     alt="Crop area"
-                    class="block w-full h-full"
+                    class="block w-full h-full select-none"
                     style="object-fit: contain;"
-                    on:load={onImageLoad}
                 />
-            </div>
-
-            <div class="flex flex-wrap gap-2">
-                <button
-                    type="button"
-                    class="retro-btn retro-btn--primary retro-btn--md"
-                    on:click={crop}
-                >
-                    Crop
-                </button>
             </div>
         {/if}
     </div>
@@ -268,25 +378,20 @@
     <section class="retro-paper retro-panel mt-4">
         <div class="retro-paper__head retro-panel__head">
             <h2 class="font-black tracking-wide">Cropped result</h2>
+            <span class="text-xs opacity-80">
+                {#if outW && outH}{outW}×{outH}{:else}
+                    <!-- custom -->
+                {/if}
+            </span>
         </div>
+
         <div class="retro-panel__body">
             <RetroImagePreview
                 src={cropResultUrl}
                 alt="Cropped preview"
-                caption={fileName
-                    ? fileName.replace(/\.[^.]+$/, "") + "_cropped"
-                    : null}
+                caption={downloadNameFor(exportMime())}
                 className="mb-3"
             />
-            {#if showDownload}
-                <button
-                    type="button"
-                    class="retro-btn retro-btn--primary retro-btn--md"
-                    on:click={download}
-                >
-                    Download
-                </button>
-            {/if}
         </div>
     </section>
 {/if}
