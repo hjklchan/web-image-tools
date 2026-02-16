@@ -1,6 +1,6 @@
 <script lang="ts">
     export let visitors = "000042";
-    export let siteTitle = "ALTEXXA PERSONAL NODE";
+    export let siteTitle = "IMAZING";
     export let tagline = ":: 56k-friendly :: no cookies :: human-made ::";
     export let nav: Array<{ label: string; href: string }> = [
         { label: "/home", href: "/" },
