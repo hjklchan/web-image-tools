@@ -1,10 +1,22 @@
+<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
     import { page } from "$app/state";
     import ImageCropper from "$lib/components/ImageCropper.svelte";
-    import { presets } from "$lib/data/social-tools";
+    import { config } from "$lib/config";
+    import { presets, type Preset } from "$lib/data/social-tools";
+    import type { Meta } from "./+page";
+
+    type Props  = {
+        preset: Preset;
+        meta: Meta;
+    }
+    
+    let { data } = $props();
 
     const presetId = $derived(page.params.presetId);
+    
     const preset = $derived(presets.find((p) => p.id === presetId));
+    
 
     const sizeMatch = $derived(preset?.size.match(/(\d+)\s*[×x]\s*(\d+)/i));
     const outW = $derived(sizeMatch ? parseInt(sizeMatch[1], 10) : 1080);
@@ -13,15 +25,11 @@
 </script>
 
 <svelte:head>
-    <title>{preset?.platform} · {preset?.title}</title>
-    <meta name="description" content="{preset?.platform} · {preset?.title}">
-    <meta name="keywords" content="{preset?.platform} · {preset?.title}">
-    <meta name="author" content="IMAZING">
+    <title>{data.preset?.platform} · {data.preset?.title}</title>
+    <meta name="description" content="{data.meta.description}">
+    <meta name="keywords" content="{data.preset?.platform} · {data.preset?.title}">
+    <meta name="author" content="{config.siteName}">
     <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="bingbot" content="index, follow">
-    <meta name="yandexbot" content="index, follow">
-    <meta name="sitemap" content="https://imazing.cc/sitemap.xml">
 </svelte:head>
 
 {#if preset}
