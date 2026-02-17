@@ -12,7 +12,7 @@ export const tools: Tool[] = [
         id: "compress",
         title: "Compress",
         desc: "Local JPG/PNG/WebP compression",
-        href: "/tools/compressor",
+        href: "/basic/compressor",
         tags: ["local", "webp", "jpg", "png"],
     },
     // {
@@ -33,7 +33,7 @@ export const tools: Tool[] = [
         id: "crop",
         title: "Crop",
         desc: "Crop with free / fixed aspect",
-        href: "/tools/crop",
+        href: "/basic/crop",
         tags: ["crop", "aspect"],
     },
     // {
@@ -47,7 +47,7 @@ export const tools: Tool[] = [
         id: "watermark",
         title: "Watermark",
         desc: "Text / image watermark",
-        href: "/tools/watermark",
+        href: "/basic/watermark",
         tags: ["watermark", "text"],
         badge: "BETA",
     },
@@ -55,7 +55,7 @@ export const tools: Tool[] = [
         id: "exif",
         title: "EXIF",
         desc: "View / remove metadata (privacy)",
-        href: "/tools/exif",
+        href: "/basic/exif",
         tags: ["exif", "privacy"],
     },
     // {

@@ -29,7 +29,7 @@ export const presets: Preset[] = [
         size: "1080 × 1350",
         notes: "Grid may crop to a vertical layout; keep key content centered.",
         tags: ["post", "feed", "4:5", "resize", "crop"],
-        href: "/social-tools/ig-post-portrait",
+        href: "/social/ig-post-portrait",
     },
     {
         id: "ig-story",
@@ -38,7 +38,7 @@ export const presets: Preset[] = [
         size: "1080 × 1920",
         notes: "Safe area: 1080 × 1610 (avoid UI overlays).",
         tags: ["story", "safe-area", "9:16", "export"],
-        href: "/social-tools/ig-story",
+        href: "/social/ig-story",
     },
     {
         id: "ig-reel",
@@ -47,7 +47,7 @@ export const presets: Preset[] = [
         size: "1080 × 1920",
         notes: "Grid preview often appears as 3:4 (1080 × 1440).",
         tags: ["reel", "9:16", "thumbnail", "grid"],
-        href: "/social-tools/ig-reel",
+        href: "/social/ig-reel",
     },
 
     // TikTok
@@ -58,7 +58,7 @@ export const presets: Preset[] = [
         size: "1080 × 1920",
         notes: "Best fit for full-screen; other ratios may get letterboxed.",
         tags: ["tiktok", "9:16", "carousel", "resize"],
-        href: "/social-tools/tt-video",
+        href: "/social/tt-video",
     },
     {
         id: "tt-profile",
@@ -67,7 +67,7 @@ export const presets: Preset[] = [
         size: "200 × 200",
         notes: "Upload larger for future-proofing; will display as a circle.",
         tags: ["avatar", "profile", "circle", "crop"],
-        href: "/social-tools/tt-profile",
+        href: "/social/tt-profile",
     },
 
     // YouTube
@@ -78,7 +78,7 @@ export const presets: Preset[] = [
         size: "2560 × 1440",
         notes: "Safe area (all devices): 1546 × 423 — keep text/logo inside.",
         tags: ["banner", "safe-area", "channel-art", "export"],
-        href: "/social-tools/yt-banner",
+        href: "/social/yt-banner",
     },
     {
         id: "yt-thumb",
@@ -87,7 +87,7 @@ export const presets: Preset[] = [
         size: "1280 × 720",
         notes: "16:9 recommended; keep main subject centered.",
         tags: ["thumbnail", "16:9", "youtube"],
-        href: "/social-tools/yt-thumb",
+        href: "/social/yt-thumb",
     },
 
     // X (Twitter)
@@ -98,7 +98,7 @@ export const presets: Preset[] = [
         size: "1500 × 500",
         notes: "May crop ~60px top/bottom depending on browser/monitor.",
         tags: ["header", "cover", "crop"],
-        href: "/social-tools/x-header",
+        href: "/social/x-header",
     },
     {
         id: "x-post-landscape",
@@ -107,7 +107,7 @@ export const presets: Preset[] = [
         size: "1280 × 720",
         notes: "Recommended ratios: 16:9 or 1:1.",
         tags: ["post", "16:9", "resize"],
-        href: "/social-tools/x-post-landscape",
+        href: "/social/x-post-landscape",
     },
 
     // LinkedIn
@@ -118,7 +118,7 @@ export const presets: Preset[] = [
         size: "1584 × 396",
         notes: "Cropping differs on desktop/mobile — test both.",
         tags: ["cover", "profile", "crop"],
-        href: "/social-tools/li-cover",
+        href: "/social/li-cover",
     },
     {
         id: "li-post-link",
@@ -127,7 +127,7 @@ export const presets: Preset[] = [
         size: "1200 × 627",
         notes: "Great for URL shares.",
         tags: ["post", "link", "1.91:1", "resize"],
-        href: "/social-tools/li-post-link",
+        href: "/social/li-post-link",
     },
 
     // Facebook (simple basics)
@@ -138,7 +138,7 @@ export const presets: Preset[] = [
         size: "851 × 315",
         notes: "Displays differently on mobile/desktop; avoid bottom-left overlap.",
         tags: ["cover", "page", "crop"],
-        href: "/social-tools/fb-cover",
+        href: "/social/fb-cover",
     },
     {
         id: "fb-story",
@@ -147,7 +147,7 @@ export const presets: Preset[] = [
         size: "1080 × 1920",
         notes: "Full-screen story format.",
         tags: ["story", "9:16", "export"],
-        href: "/social-tools/fb-story",
+        href: "/social/fb-story",
     },
 ];
 
