@@ -1,0 +1,1 @@
+<h1 class="text-md opacity-70">I will continue to refine this About page in the future so you can learn more about me and the design philosophy behind this website.</h1>
