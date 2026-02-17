@@ -452,6 +452,7 @@
 					alt="Base image"
 					caption={baseFile.name}
 					className="mb-3"
+					compact={true}
 				/>
 			</div>
 		</section>
@@ -468,6 +469,7 @@
 					alt="Watermarked result"
 					caption={baseFile ? baseFile.name.replace(/(\.[^.]+)$/, "_watermarked$1") : null}
 					className="mb-3"
+					compact={true}
 				/>
 				<button
 					type="button"

@@ -240,6 +240,7 @@
                                 : ".png")
                         : null}
                     className="mb-3"
+                    compact={true}
                 />
                 <button
                     type="button"

@@ -4,18 +4,22 @@
   export let alt: string = "";
   export let caption: string | null = null;
   export let className = "";
+  export let compact: boolean = false;
 
   let open = false;
 </script>
 
-<div class={cx("space-y-2", className)}>
+<div class={cx("space-y-2", className, compact && "max-w-[280px]")}>
   <button
     type="button"
-    class="w-full text-left border border-[#caa96a] bg-white p-2 rounded-none
-           shadow-[2px_2px_0_#b08d4a] focus:outline-none"
+    class={cx(
+      "w-full text-left border border-[#caa96a] bg-white p-2 rounded-none",
+      "shadow-[2px_2px_0_#b08d4a] focus:outline-none overflow-hidden",
+      compact && "max-h-[200px] flex items-center justify-center"
+    )}
     on:click={() => (open = true)}
   >
-    <img src={src} alt={alt} class="w-full h-auto block" />
+    <img src={src} alt={alt} class={cx("block", compact ? "max-w-full max-h-[180px] w-auto h-auto object-contain" : "w-full h-auto")} />
   </button>
 
   {#if caption}

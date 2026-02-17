@@ -269,6 +269,7 @@
                     alt="Image preview"
                     caption={file.name}
                     className="mb-3"
+                    compact={true}
                 />
             </div>
         </section>
@@ -299,6 +300,7 @@
                                 ? file.name.replace(/(\.[^.]+)$/, "_no-exif$1")
                                 : null}
                             className="mb-2"
+                            compact={true}
                         />
                         <button
                             type="button"

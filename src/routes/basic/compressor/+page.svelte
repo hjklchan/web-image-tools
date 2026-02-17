@@ -261,6 +261,7 @@
 								alt="Compressed preview"
 								caption={r.original.name}
 								className="mb-2"
+								compact={true}
 							/>
 							<div class="text-xs space-y-1">
 								<div>

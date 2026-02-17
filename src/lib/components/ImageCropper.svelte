@@ -396,6 +396,7 @@
                 alt="Cropped preview"
                 caption={downloadNameFor(exportMime())}
                 className="mb-3"
+                compact={true}
             />
         </div>
     </section>
