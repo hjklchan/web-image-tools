@@ -121,6 +121,7 @@
                     </div> -->
                 </a>
             {/each}
+                <div class="flex justify-left items-end text-xs opacity-80">more tools in the future...</div>
         </div>
     </div>
 </section>
