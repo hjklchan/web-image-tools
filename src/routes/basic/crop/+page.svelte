@@ -150,7 +150,7 @@
                     type="file"
                     accept="image/jpeg,image/png,image/webp,image/gif"
                     class="retro-control mt-1"
-                    on:change={onFileChange}
+                    onchange={onFileChange}
                     aria-label="Select image to crop"
                 />
                 <div class="retro-field__hint mt-1">
@@ -175,7 +175,7 @@
                         id="aspect-ratio"
                         class="retro-control mt-1"
                         bind:value={aspectValue}
-                        on:change={onAspectChange}
+                        onchange={onAspectChange}
                     >
                         {#each ASPECT_OPTIONS as opt}
                             <option value={opt.value}>{opt.label}</option>
@@ -194,18 +194,27 @@
                         alt="Crop area"
                         class="block max-w-full"
                         style="max-height: 400px;"
-                        on:load={onImageLoad}
+                        onload={onImageLoad}
                     />
                 </div>
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap items-end gap-2">
                     <button
                         type="button"
                         class="retro-btn retro-btn--primary retro-btn--md"
-                        on:click={crop}
+                        onclick={crop}
                     >
                         Crop
                     </button>
+                    {#if cropResultUrl}
+                        <button
+                            type="button"
+                            class="retro-btn retro-btn--secondary retro-btn--md"
+                            onclick={() => document.getElementById('tool-result')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            View result
+                        </button>
+                    {/if}
                 </div>
             {/if}
         </div>
@@ -213,7 +222,7 @@
 
     <!-- Result -->
     {#if cropResultUrl}
-        <section class="retro-paper retro-panel">
+        <section id="tool-result" class="retro-paper retro-panel">
             <div class="retro-paper__head retro-panel__head">
                 <h2 class="font-black tracking-wide">Cropped result</h2>
             </div>
@@ -235,7 +244,7 @@
                 <button
                     type="button"
                     class="retro-btn retro-btn--primary retro-btn--md"
-                    on:click={download}
+                    onclick={download}
                 >
                     Download
                 </button>

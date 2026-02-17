@@ -428,6 +428,16 @@
 			>
 				{applying ? "Applying…" : "Apply watermark"}
 			</button>
+
+			{#if resultUrl}
+				<button
+					type="button"
+					class="retro-btn retro-btn--secondary retro-btn--md"
+					onclick={() => document.getElementById('tool-result')?.scrollIntoView({ behavior: 'smooth' })}
+				>
+					View result
+				</button>
+			{/if}
 		</div>
 	</section>
 
@@ -448,7 +458,7 @@
 	{/if}
 
 	{#if resultUrl}
-		<section class="retro-paper retro-panel">
+		<section id="tool-result" class="retro-paper retro-panel">
 			<div class="retro-paper__head retro-panel__head">
 				<h2 class="font-black tracking-wide">Result</h2>
 			</div>

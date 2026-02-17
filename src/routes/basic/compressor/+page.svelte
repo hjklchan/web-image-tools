@@ -130,7 +130,7 @@
 					accept="image/jpeg,image/png,image/webp,image/bmp"
 					multiple
 					class="retro-control mt-1"
-					on:change={onFileChange}
+					onchange={onFileChange}
 					disabled={compressing}
 				/>
 				<div class="retro-field__hint mt-1">
@@ -143,7 +143,7 @@
 				<button
 					type="button"
 					class="w-full px-3 py-2 text-left flex items-center justify-between border-b border-[#caa96a] bg-[#e8d7a3] hover:bg-[#e0cf93]"
-					on:click={() => (showAdvanced = !showAdvanced)}
+					onclick={() => (showAdvanced = !showAdvanced)}
 					aria-expanded={showAdvanced}
 				>
 					<span class="text-sm font-bold">Advanced options</span>
@@ -210,7 +210,7 @@
 						<button
 							type="button"
 							class="retro-btn retro-btn--secondary retro-btn--sm"
-							on:click={compressAll}
+							onclick={compressAll}
 							disabled={compressing || results.length === 0}
 						>
 							Re-compress
@@ -230,12 +230,22 @@
 					<span class="font-bold">Compressing…</span> {progress}%
 				</div>
 			{/if}
+
+			{#if results.length > 0}
+				<button
+					type="button"
+					class="retro-btn retro-btn--secondary retro-btn--md"
+					onclick={() => document.getElementById('tool-result')?.scrollIntoView({ behavior: 'smooth' })}
+				>
+					View result
+				</button>
+			{/if}
 		</div>
 	</section>
 
 	<!-- Results -->
 	{#if results.length > 0}
-		<section class="retro-paper retro-panel">
+		<section id="tool-result" class="retro-paper retro-panel">
 			<div class="retro-paper__head retro-panel__head">
 				<h2 class="font-black tracking-wide">Compression results</h2>
 				<span class="text-xs opacity-80">{results.length} image{results.length === 1 ? "" : "s"}</span>
@@ -261,7 +271,7 @@
 							<button
 								type="button"
 								class="retro-btn retro-btn--primary retro-btn--sm mt-2 w-full"
-								on:click={() => download(r.compressed)}
+								onclick={() => download(r.compressed)}
 							>
 								Download
 							</button>

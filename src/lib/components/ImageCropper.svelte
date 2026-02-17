@@ -341,6 +341,13 @@
                         >
                             Download
                         </button>
+                        <button
+                            type="button"
+                            class="retro-btn retro-btn--secondary retro-btn--md"
+                            onclick={() => document.getElementById('tool-result')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            View result
+                        </button>
                     {/if}
                 </div>
                 <span class="retro-field__hint mt-1">
@@ -373,7 +380,7 @@
 </section>
 
 {#if cropResultUrl}
-    <section class="retro-paper retro-panel mt-4">
+    <section id="tool-result" class="retro-paper retro-panel mt-4">
         <div class="retro-paper__head retro-panel__head">
             <h2 class="font-black tracking-wide">Cropped result</h2>
             <span class="text-xs opacity-80">

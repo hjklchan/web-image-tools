@@ -199,11 +199,21 @@
                     <span class="font-bold">Parsing…</span>
                 </div>
             {/if}
+
+            {#if file}
+                <button
+                    type="button"
+                    class="retro-btn retro-btn--secondary retro-btn--md"
+                    onclick={() => document.getElementById('tool-result')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                    View result
+                </button>
+            {/if}
         </div>
     </section>
 
     {#if exifData && Object.keys(exifData).length > 0}
-        <section class="retro-paper retro-panel">
+        <section id="tool-result" class="retro-paper retro-panel">
             <div class="retro-paper__head retro-panel__head">
                 <h2 class="font-black tracking-wide">EXIF Data</h2>
                 <span class="text-xs opacity-80"
@@ -243,7 +253,7 @@
             </div>
         </section>
     {:else if exifData !== null}
-        <div class="retro-notice retro-notice--info">
+        <div id="tool-result" class="retro-notice retro-notice--info">
             <span class="font-bold">No EXIF data</span> found in this image.
         </div>
     {/if}
