@@ -7,6 +7,10 @@
     let { children } = $props();
 </script>
 
+<svelte:head>
+  <title>imazing</title>
+</svelte:head>
+
 <div class="min-h-screen retro-bg flex flex-col">
     <Header siteTitle={config.siteName} tagLine={config.tagLine} />
     <main class="mx-auto w-full max-w-7xl px-3 py-4 flex-1">
