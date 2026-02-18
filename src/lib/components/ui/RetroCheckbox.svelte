@@ -7,6 +7,6 @@
 </script>
 
 <label class={cx("inline-flex items-center gap-2 text-sm", className)}>
-  <input type="checkbox" bind:checked {name} class="h-4 w-4 rounded-none border border-[#caa96a] accent-[#143a66]" />
+  <input type="checkbox" bind:checked {name} class="h-4 w-4 rounded-none border border-retro-paper-border accent-retro-navy" />
   <span class="select-none">{label}</span>
 </label>

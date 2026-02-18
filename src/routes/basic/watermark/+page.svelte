@@ -163,7 +163,7 @@
 </script>
 
 <div class="space-y-4">
-	<a href="/tools" class="retro-link text-sm">← Back to tools</a>
+	<a href="/basic" class="retro-link text-sm">← Back</a>
 
 	<section class="retro-paper retro-panel">
 		<div class="retro-paper__head retro-panel__head">
@@ -220,7 +220,7 @@
 			</fieldset>
 
 			{#if mode === "text"}
-				<div class="space-y-3 border border-[#caa96a] bg-[#fffbe3] p-3">
+				<div class="space-y-3 border border-retro-paper-border bg-retro-paper p-3">
 					<div>
 						<label for="wm-text" class="retro-field__label">Text</label>
 						<input
@@ -279,7 +279,7 @@
 					</div>
 				</div>
 			{:else if mode === "textRepeat"}
-				<div class="space-y-3 border border-[#caa96a] bg-[#fffbe3] p-3">
+				<div class="space-y-3 border border-retro-paper-border bg-retro-paper p-3">
 					<div>
 						<label for="wm-repeat-text" class="retro-field__label">Text</label>
 						<input
@@ -373,7 +373,7 @@
 					</div>
 				</div>
 			{:else}
-				<div class="space-y-3 border border-[#caa96a] bg-[#fffbe3] p-3">
+				<div class="space-y-3 border border-retro-paper-border bg-retro-paper p-3">
 					<div>
 						<label for="wm-image" class="retro-field__label">Watermark image</label>
 						<input

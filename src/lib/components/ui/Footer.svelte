@@ -8,7 +8,7 @@
   export let note = "made with ♥ and plain HTML";
 </script>
 
-<footer class="mt-auto border-t border-[#0e2746] bg-[#143a66] text-[#fef7d6]">
+<footer class="mt-auto border-t border-retro-navy-border bg-retro-navy text-retro-cream">
   <div class="mx-auto max-w-6xl px-3 py-3 text-xs flex flex-wrap items-center gap-2">
     <span>{copyright}</span>
     <span class="opacity-80">|</span>

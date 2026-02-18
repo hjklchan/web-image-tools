@@ -13,8 +13,8 @@
   <button
     type="button"
     class={cx(
-      "w-full text-left border border-[#caa96a] bg-white p-2 rounded-none",
-      "shadow-[2px_2px_0_#b08d4a] focus:outline-none overflow-hidden",
+      "w-full text-left border border-retro-paper-border bg-white p-2 rounded-none",
+      "shadow-[2px_2px_0_var(--color-retro-paper-shadow)] focus:outline-none overflow-hidden",
       compact && "max-h-[200px] flex items-center justify-center"
     )}
     on:click={() => (open = true)}
@@ -29,10 +29,10 @@
   {#if open}
     <div class="fixed inset-0 z-50 bg-black/60 p-3 flex items-center justify-center" on:click={() => (open = false)}>
       <div
-        class="max-w-5xl w-full border border-[#caa96a] bg-[#fffbe3] shadow-[2px_2px_0_#b08d4a]"
+        class="max-w-5xl w-full border border-retro-paper-border bg-retro-paper shadow-[2px_2px_0_var(--color-retro-paper-shadow)]"
         on:click|stopPropagation
       >
-        <div class="px-3 py-2 bg-[#e8d7a3] border-b border-[#caa96a] flex items-center gap-2">
+        <div class="px-3 py-2 bg-retro-paper-header border-b border-retro-paper-border flex items-center gap-2">
           <div class="font-bold">Image Viewer</div>
           <div class="ml-auto">
             <button class="underline hover:no-underline text-sm" type="button" on:click={() => (open = false)}>

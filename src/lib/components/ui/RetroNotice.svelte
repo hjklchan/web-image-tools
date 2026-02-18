@@ -5,9 +5,9 @@
   export let className = "";
 
   const toneClass = {
-    info: "bg-[#eef6ff] border-[#7aa7d9] text-[#0b2a4a]",
-    warn: "bg-[#fff6c9] border-[#caa96a] text-[#3a2a0b]",
-    ok: "bg-[#ecfdf5] border-[#86efac] text-[#064e3b]",
+    info: "bg-retro-sky border-retro-sky-border text-retro-sky-ink",
+    warn: "bg-retro-paper-light border-retro-paper-border text-retro-warn-ink",
+    ok: "bg-retro-ok border-retro-ok-border text-retro-ok-ink",
   }[tone];
 </script>
 

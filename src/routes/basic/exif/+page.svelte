@@ -159,7 +159,7 @@
 </script>
 
 <div class="space-y-4">
-    <a href="/tools" class="retro-link text-sm">← Back to tools</a>
+    <a href="/basic" class="retro-link text-sm">← Back</a>
 
     <section class="retro-paper retro-panel">
         <div class="retro-paper__head retro-panel__head">
@@ -225,10 +225,10 @@
                     {#each EXIF_ORDER as key}
                         {#if key in exifData}
                             <div
-                                class="flex flex-wrap gap-2 border-b border-[#caa96a]/40 py-1"
+                                class="flex flex-wrap gap-2 border-b border-retro-paper-border/40 py-1"
                             >
                                 <span
-                                    class="font-bold text-[#143a66] min-w-[140px]"
+                                    class="font-bold text-retro-navy min-w-[140px]"
                                     >{key}</span
                                 >
                                 <span class="break-all"
@@ -239,9 +239,9 @@
                     {/each}
                     {#each Object.keys(exifData).filter((k) => !EXIF_ORDER.includes(k)) as key}
                         <div
-                            class="flex flex-wrap gap-2 border-b border-[#caa96a]/40 py-1"
+                            class="flex flex-wrap gap-2 border-b border-retro-paper-border/40 py-1"
                         >
-                            <span class="font-bold text-[#143a66] min-w-[140px]"
+                            <span class="font-bold text-retro-navy min-w-[140px]"
                                 >{key}</span
                             >
                             <span class="break-all"

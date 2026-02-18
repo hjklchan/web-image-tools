@@ -34,7 +34,7 @@
 
 {#if preset}
     <div class="space-y-4">
-        <a href="/social-tools" class="retro-link text-sm">← Back to social presets</a>
+        <a href="/social" class="retro-link text-sm">← Back</a>
 
         <ImageCropper
             title="{preset.platform} · {preset.title}"

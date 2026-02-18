@@ -1,31 +1,78 @@
 @import "tailwindcss";
 
+/* =========
+   THEME COLORS (Retro / Paper style)
+   ========= */
+@theme {
+    /* Page */
+    --color-retro-bg: #f5f1d6;
+    --color-retro-ink: #1b1b1b;
+    --color-retro-cream: #fef7d6;
+
+    /* Navy (header, primary button) */
+    --color-retro-navy: #143a66;
+    --color-retro-navy-border: #0e2746;
+    --color-retro-navy-dark: #0b1f38;
+    --color-retro-navy-light: #2c5a95;
+
+    /* Paper (cards, warm tones) */
+    --color-retro-paper: #fffbe3;
+    --color-retro-paper-light: #fff6c9;
+    --color-retro-paper-header: #e8d7a3;
+    --color-retro-paper-header-hover: #e0cf93;
+    --color-retro-paper-border: #caa96a;
+    --color-retro-paper-shadow: #b08d4a;
+
+    /* Sky (info) */
+    --color-retro-sky: #eef6ff;
+    --color-retro-sky-header: #cfe6ff;
+    --color-retro-sky-border: #7aa7d9;
+    --color-retro-sky-shadow: #5d87b8;
+    --color-retro-sky-ink: #0b2a4a;
+
+    /* Warn */
+    --color-retro-warn-ink: #3a2a0b;
+
+    /* Success / OK */
+    --color-retro-ok: #ecfdf5;
+    --color-retro-ok-border: #86efac;
+    --color-retro-ok-ink: #064e3b;
+
+    /* Error */
+    --color-retro-error-ink: #7f1d1d;
+    --color-retro-error-bg: #fff1f2;
+    --color-retro-error-border: #fecdd3;
+
+    /* Canvas (dark viewport) */
+    --color-retro-canvas: #1b1b1b;
+}
+
 @layer components {
     /* =========
     TOKENS (semantic token classes)
   ========= */
     .retro-bg {
-        @apply bg-[#f5f1d6] text-[#1b1b1b];
+        @apply bg-retro-bg text-retro-ink;
     }
 
     .retro-topbar {
-        @apply bg-[#143a66] text-[#fef7d6] border-b border-[#0e2746];
+        @apply bg-retro-navy text-retro-cream border-b border-retro-navy-border;
     }
 
     .retro-paper {
-        @apply bg-[#fffbe3] border border-[#caa96a] rounded-none;
-        box-shadow: 2px 2px 0 #b08d4a;
+        @apply bg-retro-paper border border-retro-paper-border rounded-none;
+        box-shadow: 2px 2px 0 theme(colors.retro-paper-shadow);
     }
     .retro-paper__head {
-        @apply bg-[#e8d7a3] border-b border-[#caa96a];
+        @apply bg-retro-paper-header border-b border-retro-paper-border;
     }
 
     .retro-sky {
-        @apply bg-[#eef6ff] border border-[#7aa7d9] rounded-none;
-        box-shadow: 2px 2px 0 #5d87b8;
+        @apply bg-retro-sky border border-retro-sky-border rounded-none;
+        box-shadow: 2px 2px 0 theme(colors.retro-sky-shadow);
     }
     .retro-sky__head {
-        @apply bg-[#cfe6ff] border-b border-[#7aa7d9];
+        @apply bg-retro-sky-header border-b border-retro-sky-border;
     }
 
     /* =========
@@ -38,22 +85,22 @@
 
     /* 90s emboss */
     .retro-btn--primary {
-        @apply bg-[#143a66] text-[#fef7d6] border-[#0e2746];
+        @apply bg-retro-navy text-retro-cream border-retro-navy-border;
         box-shadow:
-            inset 1px 1px 0 #2c5a95,
-            inset -1px -1px 0 #0b1f38;
+            inset 1px 1px 0 theme(colors.retro-navy-light),
+            inset -1px -1px 0 theme(colors.retro-navy-dark);
     }
     .retro-btn--secondary {
-        @apply bg-[#fffbe3] text-[#1b1b1b] border-[#caa96a];
+        @apply bg-retro-paper text-retro-ink border-retro-paper-border;
         box-shadow:
-            inset 1px 1px 0 #ffffff,
-            inset -1px -1px 0 #b08d4a;
+            inset 1px 1px 0 white,
+            inset -1px -1px 0 theme(colors.retro-paper-shadow);
     }
     .retro-btn--ghost {
-        @apply bg-white text-[#1b1b1b] border-[#caa96a];
+        @apply bg-white text-retro-ink border-retro-paper-border;
         box-shadow:
-            inset 1px 1px 0 #ffffff,
-            inset -1px -1px 0 #b08d4a;
+            inset 1px 1px 0 white,
+            inset -1px -1px 0 theme(colors.retro-paper-shadow);
     }
 
     .retro-btn--sm {
@@ -70,14 +117,14 @@
     CONTROLS
   ========= */
     .retro-control {
-        @apply w-full bg-white border border-[#caa96a] rounded-none outline-none
+        @apply w-full bg-white border border-retro-paper-border rounded-none outline-none
       px-2 py-1.5 text-sm;
         box-shadow:
-            inset 1px 1px 0 #ffffff,
-            inset -1px -1px 0 #b08d4a;
+            inset 1px 1px 0 white,
+            inset -1px -1px 0 theme(colors.retro-paper-shadow);
     }
     .retro-checkbox {
-        @apply h-4 w-4 rounded-none border border-[#caa96a] accent-[#143a66];
+        @apply h-4 w-4 rounded-none border border-retro-paper-border accent-retro-navy;
     }
 
     .retro-field__label {
@@ -87,7 +134,7 @@
         @apply text-[11px] opacity-70;
     }
     .retro-field__error {
-        @apply text-[11px] text-[#7f1d1d] bg-[#fff1f2] border border-[#fecdd3] px-2 py-1 rounded-none;
+        @apply text-[11px] text-retro-error-ink bg-retro-error-bg border border-retro-error-border px-2 py-1 rounded-none;
     }
 
     /* =========
@@ -97,13 +144,13 @@
         @apply border rounded-none px-3 py-2 text-sm;
     }
     .retro-notice--info {
-        @apply bg-[#eef6ff] border-[#7aa7d9] text-[#0b2a4a];
+        @apply bg-retro-sky border-retro-sky-border text-retro-sky-ink;
     }
     .retro-notice--warn {
-        @apply bg-[#fff6c9] border-[#caa96a] text-[#3a2a0b];
+        @apply bg-retro-paper-light border-retro-paper-border text-retro-warn-ink;
     }
     .retro-notice--ok {
-        @apply bg-[#ecfdf5] border-[#86efac] text-[#064e3b];
+        @apply bg-retro-ok border-retro-ok-border text-retro-ok-ink;
     }
 
     /* =========

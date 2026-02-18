@@ -13,7 +13,7 @@
   </div>
   <slot />
   {#if error}
-    <div class="text-[11px] text-[#7f1d1d] bg-[#fff1f2] border border-[#fecdd3] px-2 py-1 rounded-none">
+    <div class="text-[11px] text-retro-error-ink bg-retro-error-bg border border-retro-error-border px-2 py-1 rounded-none">
       {error}
     </div>
   {/if}

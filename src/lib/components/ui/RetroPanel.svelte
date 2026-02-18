@@ -11,13 +11,13 @@
   const byVariant = {
     paper: cx(retro.paper, retro.shadowPaper, "border"),
     sky: cx(retro.sky, retro.shadowSky, "border"),
-    navy: cx("bg-[#143a66] text-[#fef7d6] border border-[#0e2746] shadow-[2px_2px_0_#0b1f38]"),
+    navy: cx("bg-retro-navy text-retro-cream border border-retro-navy-border shadow-[2px_2px_0_var(--color-retro-navy-dark)]"),
   }[variant];
 
   const headerByVariant = {
     paper: cx(retro.paperHeader, "border-b"),
     sky: cx(retro.skyHeader, "border-b"),
-    navy: cx("bg-[#0e2746] border-b border-[#0b1f38]"),
+    navy: cx("bg-retro-navy-border border-b border-retro-navy-dark"),
   }[variant];
 </script>
 

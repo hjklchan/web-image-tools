@@ -15,8 +15,8 @@
   {placeholder}
   {disabled}
   class={cx(
-    "w-full bg-white border border-[#caa96a] px-2 py-1.5 text-sm rounded-none outline-none",
-    "shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#b08d4a]",
+    "w-full bg-white border border-retro-paper-border px-2 py-1.5 text-sm rounded-none outline-none",
+    "shadow-[inset_1px_1px_0_white,inset_-1px_-1px_0_var(--color-retro-paper-shadow)]",
     disabled && "opacity-60 cursor-not-allowed",
     className
   )}

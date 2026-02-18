@@ -15,11 +15,11 @@
 
   const variants = {
     primary:
-      "bg-[#143a66] text-[#fef7d6] border-[#0e2746] shadow-[inset_1px_1px_0_#2c5a95,inset_-1px_-1px_0_#0b1f38]",
+      "bg-retro-navy text-retro-cream border-retro-navy-border shadow-[inset_1px_1px_0_var(--color-retro-navy-light),inset_-1px_-1px_0_var(--color-retro-navy-dark)]",
     secondary:
-      "bg-[#fffbe3] text-[#1b1b1b] border-[#caa96a] shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#b08d4a]",
+      "bg-retro-paper text-retro-ink border-retro-paper-border shadow-[inset_1px_1px_0_white,inset_-1px_-1px_0_var(--color-retro-paper-shadow)]",
     ghost:
-      "bg-white text-[#1b1b1b] border-[#caa96a] shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#b08d4a]",
+      "bg-white text-retro-ink border-retro-paper-border shadow-[inset_1px_1px_0_white,inset_-1px_-1px_0_var(--color-retro-paper-shadow)]",
   }[variant];
 
   const disabledStyle = disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer";

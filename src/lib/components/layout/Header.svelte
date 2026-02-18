@@ -36,7 +36,7 @@
 
             <!-- <div class="ml-auto flex flex-wrap items-center gap-2 text-xs">
                 <span
-                    class="px-2 py-0.5 bg-[#0e2746] border border-[#0b1f38] rounded-none"
+                    class="px-2 py-0.5 bg-retro-navy-border border border-retro-navy-dark rounded-none"
                 >
                     VISITORS: {visitors}
                 </span>
@@ -46,20 +46,20 @@
     </div>
 
     <!-- Marquee -->
-    <div class="border-b border-[#caa96a] bg-[#fff6c9]">
+    <div class="border-b border-retro-paper-border bg-retro-paper-light">
         <div class="mx-auto max-w-7xl px-3 py-1.5 text-sm">
             <Marquee />
         </div>
     </div>
 
     <!-- Nav + Search -->
-    <div class="bg-[#fffbe3] border-b border-[#caa96a]">
+    <div class="bg-retro-paper border-b border-retro-paper-border">
         <div
             class="mx-auto max-w-7xl px-3 py-2 flex flex-wrap items-center gap-2"
         >
             <nav class="flex flex-wrap gap-1 text-sm">
                 {#each nav as item}
-                    <a class={["retro-link", "px-1", isActive(item.href) ? "text-[#143a66] font-bold": ""]} href={item.href}>{item.label}</a>
+                    <a class={["retro-link", "px-1", isActive(item.href) ? "text-retro-navy font-bold": ""]} href={item.href}>{item.label}</a>
                 {/each}
             </nav>
 

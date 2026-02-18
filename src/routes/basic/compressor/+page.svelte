@@ -112,7 +112,7 @@
 </script>
 
 <div class="space-y-4">
-	<a href="/tools" class="retro-link text-sm">← Back to tools</a>
+	<a href="/basic" class="retro-link text-sm">← Back</a>
 
 	<section class="retro-paper retro-panel">
 		<div class="retro-paper__head retro-panel__head">
@@ -139,10 +139,10 @@
 			</div>
 
 			<!-- Advanced options (collapsible) -->
-			<div class="border border-[#caa96a] bg-[#fffbe3]">
+			<div class="border border-retro-paper-border bg-retro-paper">
 				<button
 					type="button"
-					class="w-full px-3 py-2 text-left flex items-center justify-between border-b border-[#caa96a] bg-[#e8d7a3] hover:bg-[#e0cf93]"
+					class="w-full px-3 py-2 text-left flex items-center justify-between border-b border-retro-paper-border bg-retro-paper-header hover:bg-retro-paper-header-hover"
 					onclick={() => (showAdvanced = !showAdvanced)}
 					aria-expanded={showAdvanced}
 				>
@@ -254,7 +254,7 @@
 				<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{#each results as r}
 						<div
-							class="border border-[#caa96a] bg-white p-3 rounded-none shadow-[2px_2px_0_#b08d4a]"
+							class="border border-retro-paper-border bg-white p-3 rounded-none shadow-[2px_2px_0_var(--color-retro-paper-shadow)]"
 						>
 							<RetroImagePreview
 								src={r.previewUrl}
@@ -267,7 +267,7 @@
 								<div>
 									Original: {formatSize(r.originalSize)} → Compressed: {formatSize(r.compressedSize)}
 								</div>
-								<div class="font-bold text-[#064e3b]">Saved {r.ratio}</div>
+								<div class="font-bold text-retro-ok-ink">Saved {r.ratio}</div>
 							</div>
 							<button
 								type="button"

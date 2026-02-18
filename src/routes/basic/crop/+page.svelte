@@ -129,7 +129,7 @@
 </script>
 
 <div class="space-y-4">
-    <a href="/tools" class="retro-link text-sm">← Back to tools</a>
+    <a href="/basic" class="retro-link text-sm">← Back</a>
 
     <section class="retro-paper retro-panel">
         <div class="retro-paper__head retro-panel__head">
@@ -185,7 +185,7 @@
 
                 <!-- Cropper container: Cropper.js needs a visible block wrapper -->
                 <div
-                    class="border border-[#caa96a] overflow-hidden bg-[#1b1b1b]"
+                    class="border border-retro-paper-border overflow-hidden bg-retro-canvas"
                     style="height: 400px;"
                 >
                     <img

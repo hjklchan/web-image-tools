@@ -17,10 +17,10 @@
     function badgeClass(b?: Tool["badge"]) {
         if (!b) return "";
         if (b === "NEW")
-            return "bg-[#ecfdf5] border border-[#86efac] text-[#064e3b]";
+            return "bg-retro-ok border border-retro-ok-border text-retro-ok-ink";
         if (b === "HOT")
-            return "bg-[#fff6c9] border border-[#caa96a] text-[#3a2a0b]";
-        return "bg-[#eef6ff] border border-[#7aa7d9] text-[#0b2a4a]";
+            return "bg-retro-paper-light border border-retro-paper-border text-retro-warn-ink";
+        return "bg-retro-sky border border-retro-sky-border text-retro-sky-ink";
     }
 
     function onSearchSubmit(e: SubmitEvent) {
@@ -35,7 +35,7 @@
         <span class="text-xs opacity-80">simple grid · local-first</span>
 
         <div class="ml-auto text-xs flex items-center gap-2">
-            <span class="px-2 py-0.5 bg-white border border-[#caa96a]"
+            <span class="px-2 py-0.5 bg-white border border-retro-paper-border"
                 >TOTAL: {tools.length}</span
             >
             <a class="retro-link" href="/tools">/tools</a>
@@ -85,7 +85,7 @@
             {#each filtered as t (t.id)}
                 <a
                     href={t.href}
-                    class="block border border-[#caa96a] bg-white rounded-none shadow-[2px_2px_0_#b08d4a] p-3 hover:underline"
+                    class="block border border-retro-paper-border bg-white rounded-none shadow-[2px_2px_0_var(--color-retro-paper-shadow)] p-3 hover:underline"
                 >
                     <div class="flex items-start gap-2">
                         <div class="min-w-0">
@@ -108,7 +108,7 @@
                     <div class="mt-2 flex flex-wrap gap-1 text-[11px]">
                         {#each t.tags as tag}
                             <span
-                                class="px-2 py-0.5 border border-[#caa96a] bg-[#fffbe3] rounded-none"
+                                class="px-2 py-0.5 border border-retro-paper-border bg-retro-paper rounded-none"
                                 >{tag}</span
                             >
                         {/each}

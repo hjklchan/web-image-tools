@@ -364,7 +364,7 @@
 
             <!-- Fixed-height preview -->
             <div
-                class="border border-[#caa96a] overflow-hidden bg-[#1b1b1b]"
+                class="border border-retro-paper-border overflow-hidden bg-retro-canvas"
                 style={`height:${previewHeight};min-height:${previewMinHeight};`}
             >
                 <img

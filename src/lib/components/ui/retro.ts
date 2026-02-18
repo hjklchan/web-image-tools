@@ -1,13 +1,13 @@
 export const retro = {
-  bg: "bg-[#f5f1d6]",
-  ink: "text-[#1b1b1b]",
-  navy: "bg-[#143a66] text-[#fef7d6] border-[#0e2746]",
-  paper: "bg-[#fffbe3] border-[#caa96a]",
-  paperHeader: "bg-[#e8d7a3] border-[#caa96a]",
-  sky: "bg-[#eef6ff] border-[#7aa7d9]",
-  skyHeader: "bg-[#cfe6ff] border-[#7aa7d9]",
-  shadowPaper: "shadow-[2px_2px_0_#b08d4a]",
-  shadowSky: "shadow-[2px_2px_0_#5d87b8]",
+  bg: "bg-retro-bg",
+  ink: "text-retro-ink",
+  navy: "bg-retro-navy text-retro-cream border-retro-navy-border",
+  paper: "bg-retro-paper border-retro-paper-border",
+  paperHeader: "bg-retro-paper-header border-retro-paper-border",
+  sky: "bg-retro-sky border-retro-sky-border",
+  skyHeader: "bg-retro-sky-header border-retro-sky-border",
+  shadowPaper: "shadow-[2px_2px_0_var(--color-retro-paper-shadow)]",
+  shadowSky: "shadow-[2px_2px_0_var(--color-retro-sky-shadow)]",
 };
 
 export function cx(...classes: Array<string | false | null | undefined>) {
