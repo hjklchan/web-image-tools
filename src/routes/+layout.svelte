@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <title>imazing</title>
+  <title>{config.siteName}</title>
 </svelte:head>
 
 <div class="min-h-screen retro-bg flex flex-col">
