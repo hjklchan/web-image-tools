@@ -2,6 +2,7 @@
     import Marquee from "../Marquee.svelte";
     import { navs as nav } from "$lib/data/navs";
     import type { Snippet } from "svelte";
+    import { page } from "$app/state";
 
     type Props = {
         siteTitle?: Snippet | string;
@@ -16,6 +17,10 @@
     // export let tagline = TAG_LINE;
 
     // let q = $state("");
+
+    function isActive(href: string) {
+        return page.url.pathname === href;
+    }
 </script>
 
 <header class="sticky top-0 z-30">
@@ -52,9 +57,9 @@
         <div
             class="mx-auto max-w-7xl px-3 py-2 flex flex-wrap items-center gap-2"
         >
-            <nav class="flex flex-wrap gap-3 text-sm">
+            <nav class="flex flex-wrap gap-1 text-sm">
                 {#each nav as item}
-                    <a class="retro-link" href={item.href}>{item.label}</a>
+                    <a class={["retro-link", "px-1", isActive(item.href) ? "text-[#143a66] font-bold": ""]} href={item.href}>{item.label}</a>
                 {/each}
             </nav>
 
