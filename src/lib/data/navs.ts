@@ -4,7 +4,7 @@ export type Nav = {
 };
 
 export const navs: Nav[] = [
-    { label: "/home", href: "/" },
+    { label: "/root", href: "/" },
     { label: "/basic", href: "/basic" },
     { label: "/social-presets", href: "/social" },
     { label: "/about.txt", href: "/about" },
