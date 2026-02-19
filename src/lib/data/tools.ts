@@ -15,19 +15,19 @@ export const tools: Tool[] = [
         href: "/basic/compressor",
         tags: ["local", "webp", "jpg", "png"],
     },
+    {
+        id: "resize",
+        title: "Resize",
+        desc: "Scale images, keep aspect ratio",
+        href: "/basic/resize",
+        tags: ["resize", "ratio", "scale"],
+    },
     // {
     //     id: "convert",
     //     title: "Convert",
     //     desc: "Convert PNG ↔ JPG ↔ WebP (batch)",
     //     href: "/tools/images/convert",
     //     tags: ["batch", "convert"],
-    // },
-    // {
-    //     id: "resize",
-    //     title: "Resize",
-    //     desc: "Scale images, keep aspect ratio",
-    //     href: "/tools/images/resize",
-    //     tags: ["resize", "ratio"],
     // },
     {
         id: "crop",
