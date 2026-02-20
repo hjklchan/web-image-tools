@@ -1,11 +1,11 @@
 <script lang="ts">
     export let copyright = "© 1998–2026 imazing.com";
     export let links: Array<{ label: string; href: string }> = [
-        { label: "contact", href: "/contact" },
-        { label: "privacy", href: "/privacy" },
-        { label: "mirror", href: "/mirror" },
+        // { label: "contact", href: "/contact" },
+        // { label: "privacy", href: "/privacy" },
+        // { label: "mirror", href: "/mirror" },
     ];
-    export let note = "made with ♥ and plain HTML";
+    export let note: string | null = "made by ★hjkl1★";
 </script>
 
 <footer class="mt-auto border-t border-retro-navy-border bg-retro-navy text-retro-cream">
@@ -17,6 +17,8 @@
         {#each links as l}
             <a class="retro-link" href={l.href}>{l.label}</a>
         {/each}
-        <span class="ml-auto opacity-90">{note}</span>
+        {#if note}
+            <span class="ml-auto opacity-90">{note}</span>
+        {/if}
     </div>
 </footer>
