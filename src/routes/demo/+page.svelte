@@ -1,4 +1,5 @@
 <script lang="ts">
+    import ImageFiltersFX from "$lib/components/ImageFiltersFX.svelte";
     import {
         RetroPanel,
         RetroButton,
@@ -49,6 +50,8 @@
     </aside>
 
     <main class="space-y-4">
+        <!-- <ImageFiltersFX /> -->
+
         <RetroNotice tone="warn" title="Notice: ">
             This is the full retro UI kit. No fancy transitions.
         </RetroNotice>
