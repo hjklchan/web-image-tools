@@ -28,7 +28,7 @@
     <aside class="space-y-4">
         <RetroPanel title="Site Menu" variant="paper">
             <nav class="text-sm space-y-2">
-                <a class="block underline hover:no-underline" href="/demo"
+                <!-- <a class="block underline hover:no-underline" href="/demo"
                     >/demo</a
                 >
                 <a class="block underline hover:no-underline" href="/links"
@@ -36,7 +36,7 @@
                 >
                 <a class="block underline hover:no-underline" href="/about"
                     >/about.txt</a
-                >
+                > -->
             </nav>
         </RetroPanel>
 
