@@ -43,14 +43,14 @@ export const tools: Tool[] = [
     //     href: "/tools/images/rotate",
     //     tags: ["rotate", "flip"],
     // },
-    {
-        id: "watermark",
-        title: "Watermark",
-        desc: "Text / image watermark",
-        href: "/basic/watermark",
-        tags: ["watermark", "text"],
-        badge: "BETA",
-    },
+    // {
+    //     id: "watermark",
+    //     title: "Watermark",
+    //     desc: "Text / image watermark",
+    //     href: "/basic/watermark",
+    //     tags: ["watermark", "text"],
+    //     badge: "BETA",
+    // },
     {
         id: "exif",
         title: "EXIF",
