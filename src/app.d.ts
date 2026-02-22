@@ -8,6 +8,18 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	namespace App {
+		interface PageData {
+			meta?: {
+				title?: string;
+				description?: string;
+				canonical?: string;
+				robots?: string;
+			};
+		}
+	}
 }
 
-export {};
+export { };
+

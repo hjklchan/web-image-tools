@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let copyright = "© 1998–2026 imazing.com";
+    export let copyright = "© 1998–2026 imazing.work";
     export let links: Array<{ label: string; href: string }> = [
         // { label: "contact", href: "/contact" },
         // { label: "privacy", href: "/privacy" },
