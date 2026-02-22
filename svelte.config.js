@@ -13,7 +13,8 @@ const config = {
 			// precompress: false,
 			// strict: true,
 
-			out: "build",
+			out: ".svelte-kit/output",
+			
 		}),
 	}
 };
