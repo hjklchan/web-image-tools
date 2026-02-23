@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-node';
+import adapter from '@sveltejs/adapter-cloudflare';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -13,7 +13,7 @@ const config = {
 			// precompress: false,
 			// strict: true,
 
-			out: ".svelte-kit/output",
+			// out: ".svelte-kit/output",
 			
 		}),
 	}
