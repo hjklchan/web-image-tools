@@ -36,13 +36,13 @@ export const tools: Tool[] = [
         href: "/basic/crop",
         tags: ["crop", "aspect"],
     },
-    // {
-    //     id: "rotate",
-    //     title: "Rotate",
-    //     desc: "Rotate / flip / fix orientation",
-    //     href: "/tools/images/rotate",
-    //     tags: ["rotate", "flip"],
-    // },
+    {
+        id: "rotate",
+        title: "Rotate",
+        desc: "Rotate / flip",
+        href: "/basic/rotate",
+        tags: ["rotate", "flip"],
+    },
     // {
     //     id: "watermark",
     //     title: "Watermark",
