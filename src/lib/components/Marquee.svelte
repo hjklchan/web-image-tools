@@ -5,7 +5,7 @@
     };
 
     let {
-        content = `★ Welcome to ${PUBLIC_DOMAIN} ★ Links updated ★ New tools & textfiles ★ Keep the web small, keep it human ★`,
+        content = `★ Welcome to ${PUBLIC_DOMAIN} ★ Links updated ★ Keep the web simple & small ★ will keep updating...`,
     }: Props = $props();
 </script>
 
