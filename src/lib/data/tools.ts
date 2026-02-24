@@ -22,13 +22,13 @@ export const tools: Tool[] = [
         href: "/basic/resize",
         tags: ["resize", "ratio", "scale"],
     },
-    // {
-    //     id: "convert",
-    //     title: "Convert",
-    //     desc: "Convert PNG ↔ JPG ↔ WebP (batch)",
-    //     href: "/tools/images/convert",
-    //     tags: ["batch", "convert"],
-    // },
+    {
+        id: "convert",
+        title: "Convert",
+        desc: "PNG ↔ JPG ↔ WebP (batch)",
+        href: "/basic/convert",
+        tags: ["batch", "convert", "webp"],
+    },
     {
         id: "crop",
         title: "Crop",
