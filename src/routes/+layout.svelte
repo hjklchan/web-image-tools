@@ -13,7 +13,7 @@
     const meta = $derived($page.data?.meta ?? {});
     const title = $derived(() => meta.title ?? "Image Tools");
     const description = $derived(
-        () => meta.description ?? "Fast, free, local image tools.",
+        () => meta.description ?? "Free Image Tools – Edit & Optimize Images Locally | No Upload",
     );
     const canonical = $derived(
         () => meta.canonical ?? config.siteUrl + $page.url.pathname,
