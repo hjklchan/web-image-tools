@@ -172,4 +172,43 @@
     .retro-link {
         @apply underline hover:no-underline;
     }
+
+
+    .retro-range {
+    @apply w-full accent-retro-navy;
+  }
+
+  .retro-chip {
+    @apply inline-flex items-center border rounded-none px-2 py-1 text-xs;
+    @apply bg-white text-retro-sky-ink border-retro-sky-border;
+  }
+
+  .retro-kv {
+    @apply border rounded-none p-2 text-xs;
+    @apply bg-retro-paper-light border-retro-paper-border text-retro-ink;
+  }
+
+  .retro-stage {
+    @apply border border-retro-sky-border bg-retro-sky rounded-none;
+    box-shadow: 2px 2px 0 theme(colors.retro-sky-shadow);
+  }
+
+  .retro-stage__viewport {
+    @apply relative flex min-h-[360px] sm:min-h-[480px] lg:min-h-[620px]
+      items-center justify-center overflow-auto border border-dashed
+      border-retro-sky-border bg-white p-4;
+  }
+
+  .retro-stage__overlay {
+    @apply absolute inset-0 z-10 flex items-center justify-center bg-white/80;
+  }
+
+  .retro-stage__image {
+    @apply block max-w-none select-none object-contain;
+  }
+
+  .retro-code {
+    font-family: "Courier New", Courier, monospace;
+    @apply text-xs sm:text-sm break-all;
+  }
 }
