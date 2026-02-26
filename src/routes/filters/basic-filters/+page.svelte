@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {config} from '$lib/config';
+	import { config } from "$lib/config";
 	import PageHeader from "$lib/components/ui/PageHeader.svelte";
 
 	type FilterMode = "preset" | "custom";
@@ -24,7 +24,9 @@
 		| "invert"
 		| "negative"
 		| "blur"
-		| "vivid";
+		| "vivid"
+		| "ccd"
+		| "polaroid";
 
 	type PresetDefinition = {
 		id: PresetId;
@@ -50,6 +52,46 @@
 			label: "None",
 			category: "style",
 			apply: () => ({ ...DEFAULT_CSS }),
+		},
+		// CCD：冷调、轻微高对比、高饱和、一点点数码锐感氛围
+		{
+			id: "ccd",
+			label: "CCD",
+			category: "style",
+			apply: (strength) => {
+				const t = Math.max(0, Math.min(100, strength)) / 100;
+
+				return {
+					blur: 0,
+					brightness: 100 + 4 * t, // 稍微提亮
+					contrast: 100 + 18 * t, // 增加对比
+					saturate: 100 + 22 * t, // 增加饱和
+					grayscale: 0,
+					hueRotate: -6 * t, // 轻微偏冷（往青蓝方向）
+					invert: 0,
+					sepia: 2 * t, // 极轻微暖底，避免太“死冷”
+				};
+			},
+		},
+		// Polaroid：暖调、复古、轻微泛黄、稍柔和
+		{
+			id: "polaroid",
+			label: "Polaroid",
+			category: "artistic",
+			apply: (strength) => {
+				const t = Math.max(0, Math.min(100, strength)) / 100;
+
+				return {
+					blur: 0,
+					brightness: 100 + 8 * t, // 略微提亮
+					contrast: 100 - 8 * t, // 稍降对比，更柔和
+					saturate: 100 - 6 * t, // 略微褪色
+					grayscale: 3 * t, // 很轻的旧照片感
+					hueRotate: 8 * t, // 往暖色偏一点
+					invert: 0,
+					sepia: 16 * t, // 主要的复古暖黄来源
+				};
+			},
 		},
 		{
 			id: "sepia",
@@ -355,10 +397,7 @@
 	/>
 </svelte:head>
 
-<PageHeader
-	title="Basic Image Filter (BETA)"
-	// subtitle="Local processing · Instant preview · Presets + Custom · Export PNG/JPG/WEBP"
-/>
+<PageHeader title="Basic Image Filter (BETA)" />
 
 <div
 	class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[320px_minmax(0,1fr)]"
@@ -387,14 +426,6 @@
 					/>
 					<div class="retro-field__hint mt-1">
 						JPG, PNG, WebP, BMP supported.
-					</div>
-				</div>
-				<div class="retro-kv space-y-1">
-					<div><strong>File:</strong> {imageName}</div>
-					<div><strong>Size:</strong> {imageSizeText}</div>
-					<div>
-						<strong>Dimensions:</strong>
-						{originalWidth} × {originalHeight}
 					</div>
 				</div>
 			</section>
