@@ -8,6 +8,7 @@ export const navs: Nav[] = [
     { label: "/basic", href: "/basic" },
     { label: "/social-presets", href: "/social" },
     { label: "/about.txt", href: "/about" },
+    { label: "/basic-filters", href: "/filters/basic-filters" },
     // { label: "/links", href: "/links" },
     // { label: "/archives", href: "/archives" },
     // { label: "/guestbook", href: "/guestbook" },
