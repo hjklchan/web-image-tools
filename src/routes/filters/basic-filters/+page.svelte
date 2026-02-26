@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {config} from '$lib/config';
 	import PageHeader from "$lib/components/ui/PageHeader.svelte";
 
 	type FilterMode = "preset" | "custom";
@@ -343,19 +344,19 @@
 </script>
 
 <svelte:head>
-	<title>Retro A Image Filter Tool | SvelteKit + Svelte 5</title>
+	<title>Basic Image Filter Tool - {config.siteName}</title>
 	<meta
 		name="description"
-		content="Browser-side image filter tool with instant preview, presets, custom CSS filters, and PNG/JPG/WEBP export."
+		content="Image filter tool with instant preview, presets, custom CSS filters, and PNG/JPG/WEBP export."
 	/>
 	<meta
 		name="keywords"
-		content="image filter tool, css filter, jpg png webp converter, sveltekit"
+		content="Basic image filter tool, css filter, jpg png webp converter, sveltekit"
 	/>
 </svelte:head>
 
 <PageHeader
-	title="Image Filter"
+	title="Basic Image Filter (BETA)"
 	// subtitle="Local processing · Instant preview · Presets + Custom · Export PNG/JPG/WEBP"
 />
 
