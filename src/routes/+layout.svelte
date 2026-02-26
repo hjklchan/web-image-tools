@@ -11,7 +11,7 @@
     let { children } = $props();
 
     const meta = $derived($page.data?.meta ?? {});
-    const title = $derived(() => meta.title ?? "Image Tools");
+    const title = $derived(() => meta.title ?? "Free Image Tools");
     const description = $derived(
         () => meta.description ?? "Free Image Tools – Edit & Optimize Images Locally | No Upload",
     );
