@@ -58,6 +58,13 @@ export const tools: Tool[] = [
         href: "/basic/exif",
         tags: ["exif", "privacy"],
     },
+    {
+        id: "splitter",
+        title: "Splitter",
+        desc: "Split image into grid, export ZIP",
+        href: "/splitter",
+        tags: ["split", "social", "grid"],
+    },
     // {
     //     id: "palette",
     //     title: "Palette",
