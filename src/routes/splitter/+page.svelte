@@ -2,6 +2,7 @@
 	import { browser } from "$app/environment";
 	import { onDestroy } from "svelte";
 	import PageHeader from "$lib/components/ui/PageHeader.svelte";
+	import RetroImagePreview from "$lib/components/ui/RetroImagePreview.svelte";
 	import Cropper from "cropperjs";
 	import "cropperjs/dist/cropper.css";
 	import JSZip from "jszip";
@@ -32,6 +33,9 @@
 	let cropper: Cropper | null = null;
 	let CropperClass: typeof Cropper | null = null;
 
+	/** Split results: blob URLs for grid display (mobile long-press to save) */
+	let splitResults = $state<{ url: string; name: string }[]>([]);
+
 	const aspectRatio = $derived(Number(aspectValue) || 1);
 	const totalCells = $derived(rows * cols);
 
@@ -58,6 +62,11 @@
 		input.value = "";
 	}
 
+	function revokeSplitResults() {
+		for (const r of splitResults) URL.revokeObjectURL(r.url);
+		splitResults = [];
+	}
+
 	function cleanup() {
 		if (cropper) {
 			cropper.destroy();
@@ -66,6 +75,7 @@
 		if (imgSrc) URL.revokeObjectURL(imgSrc);
 		imgSrc = "";
 		fileName = "";
+		revokeSplitResults();
 	}
 
 	function updateGridOverlay() {
@@ -142,7 +152,8 @@
 		updateGridOverlay();
 	});
 
-	async function splitAndDownload() {
+	/** Generate split results and show in grid (no download) */
+	async function runSplit() {
 		if (!cropper || !imgEl || !imgSrc) return;
 
 		processing = true;
@@ -161,8 +172,11 @@
 			const quality = mime === "image/png" ? undefined : 0.92;
 			const ext = mime === "image/jpeg" ? "jpg" : mime === "image/webp" ? "webp" : "png";
 
-			const zip = new JSZip();
 			const baseName = (fileName || "image").replace(/\.[^.]+$/, "");
+
+			revokeSplitResults();
+
+			const results: { url: string; name: string }[] = [];
 
 			for (let row = 0; row < rows; row++) {
 				for (let col = 0; col < cols; col++) {
@@ -187,17 +201,12 @@
 					if (!blob) continue;
 
 					const name = `${baseName}_${row + 1}-${col + 1}.${ext}`;
-					zip.file(name, blob);
+					const blobUrl = URL.createObjectURL(blob);
+					results.push({ url: blobUrl, name });
 				}
 			}
 
-			const zipBlob = await zip.generateAsync({ type: "blob" });
-			const url = URL.createObjectURL(zipBlob);
-			const a = document.createElement("a");
-			a.href = url;
-			a.download = `${baseName}_split_${rows}x${cols}.zip`;
-			a.click();
-			URL.revokeObjectURL(url);
+			splitResults = results;
 		} catch (err) {
 			console.error(err);
 			error = err instanceof Error ? err.message : "Split failed";
@@ -206,10 +215,46 @@
 		}
 	}
 
+	/** Create ZIP from splitResults and trigger download */
+	async function createAndDownloadZIP() {
+		const zip = new JSZip();
+		for (const r of splitResults) {
+			const blob = await fetch(r.url).then((res) => res.blob());
+			zip.file(r.name, blob);
+		}
+		const baseName = (fileName || "image").replace(/\.[^.]+$/, "");
+		const zipBlob = await zip.generateAsync({ type: "blob" });
+		const zipUrl = URL.createObjectURL(zipBlob);
+		const a = document.createElement("a");
+		a.href = zipUrl;
+		a.download = `${baseName}_split_${rows}x${cols}.zip`;
+		a.click();
+		URL.revokeObjectURL(zipUrl);
+	}
+
+	/** Download ZIP from existing results; if none, run split first then download */
+	async function downloadZIP() {
+		if (splitResults.length === 0) await runSplit();
+		if (splitResults.length === 0) return;
+		processing = true;
+		try {
+			await createAndDownloadZIP();
+		} catch (err) {
+			console.error(err);
+			error = err instanceof Error ? err.message : "Download failed";
+		} finally {
+			processing = false;
+		}
+	}
+
+	function scrollToResults() {
+		document.getElementById("splitter-results")?.scrollIntoView({ behavior: "smooth" });
+	}
+
 	onDestroy(cleanup);
 </script>
 
-<PageHeader title="Image Splitter" subtitle="1:1 | 4:5 | 3:4 | 9:16 split, download as ZIP" />
+<PageHeader title="Image Splitter (Beta)" subtitle="1:1 | 4:5 | 3:4 | 9:16 split, download as ZIP, mobile long-press to save" />
 
 <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
 	<!-- Left: Controls -->
@@ -286,11 +331,29 @@
 				<button
 					type="button"
 					class="retro-btn retro-btn--primary retro-btn--md w-full"
-					onclick={splitAndDownload}
+					onclick={runSplit}
 					disabled={processing}
 				>
-					{processing ? "Processing..." : `Download ZIP (${totalCells} images)`}
+					{processing ? "Processing..." : `Split (${totalCells} images)`}
 				</button>
+				{#if splitResults.length > 0}
+					<button
+						type="button"
+						class="retro-btn retro-btn--secondary retro-btn--md w-full"
+						onclick={scrollToResults}
+					>
+						View Results
+					</button>
+				{/if}
+				<button
+					type="button"
+					class="retro-btn retro-btn--secondary retro-btn--md w-full"
+					onclick={downloadZIP}
+					disabled={processing}
+				>
+					Download ZIP
+				</button>
+                <div class="retro-field__hint text-xs">ZIP may not work on mobile—long-press result images to save</div>
 			{/if}
 		</div>
 	</aside>
@@ -321,3 +384,28 @@
 		</div>
 	</section>
 </div>
+
+{#if splitResults.length > 0}
+	<section id="splitter-results" class="retro-paper retro-panel mt-6 scroll-mt-4">
+		<div class="retro-paper__head retro-panel__head">
+			<h2 class="font-bold tracking-wide">Results</h2>
+			<span class="retro-field__hint text-xs sm:text-sm">Long-press any image to save (mobile)</span>
+		</div>
+		<div class="retro-panel__body p-3 sm:p-4">
+			<div
+				class="grid gap-2 sm:gap-3"
+				style="grid-template-columns: repeat({cols}, minmax(0, 1fr));"
+			>
+				{#each splitResults as result (result.name)}
+					<RetroImagePreview
+						src={result.url}
+						alt={result.name}
+						caption={result.name}
+						compact={true}
+						className="!max-w-none"
+					/>
+				{/each}
+			</div>
+		</div>
+	</section>
+{/if}
