@@ -26,7 +26,8 @@
 		| "blur"
 		| "vivid"
 		| "ccd"
-		| "polaroid";
+		| "polaroid"
+		| "film-90s";
 
 	type PresetDefinition = {
 		id: PresetId;
@@ -52,6 +53,23 @@
 			label: "None",
 			category: "style",
 			apply: () => ({ ...DEFAULT_CSS }),
+		},
+		{
+			id: "film-90s",
+			label: "90s Film",
+			category: "style",
+			apply: (strength: number) => {
+				const t = Math.max(0, Math.min(100, strength)) / 100;
+				return {
+					...DEFAULT_CSS,
+					brightness: 95 * t + DEFAULT_CSS.brightness * (1 - t),
+					contrast: 105 * t + DEFAULT_CSS.contrast * (1 - t),
+					saturate: 85 * t + DEFAULT_CSS.saturate * (1 - t),
+					hueRotate: 10 * t,
+					sepia: 20 * t,
+					blur: 1 * t,
+				};
+			},
 		},
 		// CCD：冷调、轻微高对比、高饱和、一点点数码锐感氛围
 		{
