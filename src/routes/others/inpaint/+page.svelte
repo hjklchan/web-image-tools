@@ -168,7 +168,7 @@
             </div>
             <div class="retro-panel__body">
                 <div
-                    class="relative flex min-h-[320px] max-h-[70vh] w-full shrink-0 items-center justify-center overflow-hidden border border-dashed border-retro-sky-border bg-white p-4"
+                    class="relative flex min-h-[320px] max-h-[70vh] w-full shrink-0 items-center justify-center overflow-hidden border border-dashed border-retro-sky-border bg-white"
                 >
                     <span class="retro-field__hint"
                         >Select an image to inpaint</span

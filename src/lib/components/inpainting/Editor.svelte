@@ -473,7 +473,7 @@
   
   <div class="editor-root retro-bg flex flex-col gap-4" class:is-busy={isProcessingLoading}>
     <!-- History panel (standalone) -->
-    <section bind:this={historyListEl} class="retro-paper retro-panel w-full max-w-4xl shrink-0">
+    <section bind:this={historyListEl} class="retro-paper retro-panel w-full shrink-0">
       <div class="retro-panel__head retro-paper__head shrink-0">
         <h2 class="font-bold tracking-wide">History</h2>
       </div>
@@ -500,7 +500,7 @@
     </section>
 
     <!-- Stage panel (standalone) -->
-    <section class="retro-sky retro-panel w-full max-w-4xl shrink-0">
+    <section class="retro-sky retro-panel w-full shrink-0">
       <div class="retro-sky__head retro-panel__head">
         <h2 class="font-bold tracking-wide">Stage</h2>
         <span class="retro-field__hint ml-auto text-retro-sky-ink truncate max-w-[180px]" title={file.name}>
