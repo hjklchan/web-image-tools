@@ -9,6 +9,7 @@ export const navs: Nav[] = [
     { label: "/social-presets", href: "/social" },
     { label: "/about.txt", href: "/about" },
     { label: "/basic-filters", href: "/filters/basic-filters" },
+    { label: "/inpaint", href: "/others/inpaint" },
     // { label: "/links", href: "/links" },
     // { label: "/archives", href: "/archives" },
     // { label: "/guestbook", href: "/guestbook" },

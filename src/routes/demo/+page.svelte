@@ -1,5 +1,6 @@
 <script lang="ts">
     import ImageFiltersFX from "$lib/components/ImageFiltersFX.svelte";
+    import Editor from "$lib/components/inpainting/Editor.svelte";
     import {
         RetroPanel,
         RetroButton,
@@ -23,7 +24,7 @@
         { value: "zines", label: "Zines" },
     ];
 </script>
-
+<Editor class="border" />
 <div class="grid gap-4 lg:grid-cols-[280px_1fr]">
     <aside class="space-y-4">
         <RetroPanel title="Site Menu" variant="paper">
