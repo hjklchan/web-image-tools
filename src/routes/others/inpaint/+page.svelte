@@ -42,19 +42,12 @@
     subtitle="AI-powered inpainting. Brush to mark area, model fills in locally."
 />
 
-<div
-    class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[320px_minmax(0,1fr)]"
->
-    <!-- Left: Controls -->
-    <aside
-        class="retro-paper retro-panel flex max-h-[70vh] flex-col overflow-hidden lg:max-h-[80vh]"
-    >
-        <div class="retro-paper__head retro-panel__head shrink-0">
-            <h2 class="font-bold tracking-wide">Controls</h2>
-        </div>
-        <div class="retro-panel__body min-h-0 flex-1 space-y-4 overflow-y-auto">
+<div class="flex flex-col gap-4">
+    <!-- Controls (top) -->
+    <aside class="retro-paper retro-panel shrink-0">
+        <div class="retro-panel__body space-y-2">
             <!-- Model status -->
-            <section class="space-y-2">
+            <section class="space-y-1">
                 <span class="retro-field__label block">Model</span>
                 {#if downloadProgress !== 100}
                     <div class="retro-field__hint text-red-700">
@@ -71,7 +64,7 @@
             </section>
 
             <!-- Upload -->
-            <section class="space-y-2">
+            <section class="space-y-1">
                 <label for="inpaint-file" class="retro-field__label block"
                     >Select image</label
                 >
@@ -94,69 +87,10 @@
             <div class="retro-field__hint text-xs">
                 Tips: Brush areas to remove. Release to inpaint. Undo to revert.
             </div>
-
-            <!-- Q&A -->
-            <section class="space-y-2 border-t border-retro-paper-border pt-3 mt-2">
-                <span class="retro-field__label block">Q&A</span>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">How much data does the model download use?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        About 30 MB. Downloaded once on first use and then cached locally in your browser.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">Do I need to re-download the model every time?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        No. The model is stored in your browser (IndexedDB) and reused on future visits to this site.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">Are my images uploaded to a server?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        No. The model and inference run entirely in your browser. Your images and masks never leave your device.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">What happens if I clear browser data?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        Clearing site data or local storage removes the cached model. You will need to download it again next time.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">Why is the first load slow?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        The first load downloads the ONNX Runtime and model. Duration depends on your connection. Use Wi‑Fi when possible.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">What browsers or devices can use this?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        Modern desktop browsers (Chrome, Edge, Firefox, Safari) with JavaScript and WebAssembly enabled. Best experience on a PC or laptop with sufficient memory.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">Does it work on mobile phones or tablets?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        Touch is supported, but inference is resource-heavy. It may run slowly or fail on low-memory devices. A desktop browser is recommended for reliable use.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">What if my browser is not supported?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        You may see errors or slow or failed loads. Try a recent Chrome or Edge. Ensure JavaScript is enabled and you are not blocking WebAssembly or IndexedDB.
-                    </p>
-                </details>
-                <details class="retro-field__hint text-xs">
-                    <summary class="cursor-pointer font-medium">What features does my browser need?</summary>
-                    <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
-                        WebAssembly, IndexedDB (for model cache), and sufficient RAM. WebGPU is optional for faster inference; the tool falls back to WebAssembly if unavailable.
-                    </p>
-                </details>
-            </section>
         </div>
     </aside>
 
-    <!-- Right: History + Stage (when file) or placeholder -->
+    <!-- Stage (or Editor when file) -->
     {#if file}
         <div class="flex flex-col gap-4 min-w-0">
             <Editor {file} />
@@ -177,4 +111,99 @@
             </div>
         </section>
     {/if}
+
+    <!-- Q&A (below Stage) -->
+    <section class="retro-sky retro-panel">
+        <div class="retro-sky__head retro-panel__head">
+            <h2 class="font-bold tracking-wide">Q&A</h2>
+        </div>
+        <div class="retro-panel__body space-y-2">
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >How much data does the model download use?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    About 30 MB. Downloaded once on first use and then cached
+                    locally in your browser.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >Do I need to re-download the model every time?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    No. The model is stored in your browser (IndexedDB) and
+                    reused on future visits to this site.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >Are my images uploaded to a server?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    No. The model and inference run entirely in your browser.
+                    Your images and masks never leave your device.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >What happens if I clear browser data?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    Clearing site data or local storage removes the cached
+                    model. You will need to download it again next time.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >Why is the first load slow?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    The first load downloads the ONNX Runtime and model.
+                    Duration depends on your connection. Use Wi‑Fi when
+                    possible.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >What browsers or devices can use this?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    Modern desktop browsers (Chrome, Edge, Firefox, Safari) with
+                    JavaScript and WebAssembly enabled. Best experience on a PC
+                    or laptop with sufficient memory.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >Does it work on mobile phones or tablets?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    Touch is supported, but inference is resource-heavy. It may
+                    run slowly or fail on low-memory devices. A desktop browser
+                    is recommended for reliable use.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >What if my browser is not supported?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    You may see errors or slow or failed loads. Try a recent
+                    Chrome or Edge. Ensure JavaScript is enabled and you are not
+                    blocking WebAssembly or IndexedDB.
+                </p>
+            </details>
+            <details class="retro-field__hint text-xs">
+                <summary class="cursor-pointer font-medium"
+                    >What features does my browser need?</summary
+                >
+                <p class="mt-1 pl-2 border-l-2 border-retro-sky-border">
+                    WebAssembly, IndexedDB (for model cache), and sufficient
+                    RAM. WebGPU is optional for faster inference; the tool falls
+                    back to WebAssembly if unavailable.
+                </p>
+            </details>
+        </div>
+    </section>
 </div>
