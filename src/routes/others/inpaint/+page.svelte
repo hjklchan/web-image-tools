@@ -118,7 +118,7 @@
             <h2 class="font-bold tracking-wide">Q&A</h2>
         </div>
         <div class="retro-panel__body space-y-2">
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >How much data does the model download use?</summary
                 >
@@ -127,7 +127,7 @@
                     locally in your browser.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >Do I need to re-download the model every time?</summary
                 >
@@ -136,7 +136,7 @@
                     reused on future visits to this site.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >Are my images uploaded to a server?</summary
                 >
@@ -145,7 +145,7 @@
                     Your images and masks never leave your device.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >What happens if I clear browser data?</summary
                 >
@@ -154,7 +154,7 @@
                     model. You will need to download it again next time.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >Why is the first load slow?</summary
                 >
@@ -164,7 +164,7 @@
                     possible.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >What browsers or devices can use this?</summary
                 >
@@ -174,7 +174,7 @@
                     or laptop with sufficient memory.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >Does it work on mobile phones or tablets?</summary
                 >
@@ -184,7 +184,7 @@
                     is recommended for reliable use.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >What if my browser is not supported?</summary
                 >
@@ -194,7 +194,7 @@
                     blocking WebAssembly or IndexedDB.
                 </p>
             </details>
-            <details class="retro-field__hint text-xs">
+            <details class="retro-field__hint text-sm">
                 <summary class="cursor-pointer font-medium"
                     >What features does my browser need?</summary
                 >
