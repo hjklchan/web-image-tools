@@ -10,7 +10,7 @@ const config = {
 			// pages: "build",
 			// assets: "build",
 			// fallback: null,
-			// precompress: false,
+			precompress: true,
 			// strict: true,
 
 			// out: ".svelte-kit/output",
